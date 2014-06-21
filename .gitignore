@@ -1,0 +1,4 @@
+web-client/bower_components/
+*.log
+venv/
+web-server/uploads/
