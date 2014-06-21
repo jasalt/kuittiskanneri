@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html ng-app="myApp">
+
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Normal Bootstrap mobile view -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- Disable zoom -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+
+    <title>ScannerApp</title>
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css"> -->
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+  </head>
+
+  <body ng-controller="MyController">
+    <h1>The Kuittiskanneri App</h1>
+
+    <div class="row">
+      <div class="col-md-3">
+        <h3>Lataa tiedosto</h3>
+        <input ng-file-select type="file" />
+      </div>
+    </div>
+
+    <!-- Load libs -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap/dist/css/bootstrap.min.css"></script>
+    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.5/angular.min.js"></script> -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.5/angular-animate.min.js"></script> -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
