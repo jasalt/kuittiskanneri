@@ -1,6 +1,6 @@
 See www.trello.com.
 
-# Hooks
+# Hooks that should work
 ## .git/hooks/pre-push
 
 #!/bin/sh
