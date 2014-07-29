@@ -37,3 +37,6 @@ valio
 vaasan
 jäätelö
 maito
+rasvaton
+banaani
+maksamakkara
