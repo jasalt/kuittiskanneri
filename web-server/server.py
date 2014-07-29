@@ -58,13 +58,13 @@ def ocr_testing(filename):
             proc = subprocess.Popen([OCR_SCRIPT, imagepath],
                                     stdout=subprocess.PIPE)
             for line in iter(proc.stdout.readline, ''):
-                image_text += line.rstrip() + "<br/>"
+                image_text += line.rstrip() + '\n'
 
             corrected_text = autocorrect.correct_text_block(image_text)
 
             return '''
             <!doctype html>
-            <p>%s</p>
+            <pre>%s</pre>
             ''' % (corrected_text)
 
     return '''
