@@ -137,3 +137,6 @@ pullava
 biojätekassi
 hernekeitto
 valiojogurtti
+ruiseväs
+tonnikalahiutale
+vedessä
