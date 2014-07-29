@@ -4,6 +4,8 @@ from flask import Flask, request, redirect, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
+import autocorrect
+
 # Store pics temporarily on api server
 OCR_SCRIPT = '/root/dev/tess_test/ocr.sh'
 UPLOAD_FOLDER = 'uploads/'
@@ -12,6 +14,8 @@ ALLOWED_EXTENSIONS = set(['png','jpg','jpeg','gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+autocorrect.init('wordlist.txt')
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -55,10 +59,13 @@ def ocr_testing(filename):
                                     stdout=subprocess.PIPE)
             for line in iter(proc.stdout.readline, ''):
                 image_text += line.rstrip() + "<br/>"
+
+            corrected_text = autocorrect.correct_text_block(image_text)
+
             return '''
             <!doctype html>
             <p>%s</p>
-            ''' % (image_text)
+            ''' % (corrected_text)
 
     return '''
     <!doctype html>
