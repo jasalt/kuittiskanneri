@@ -60,6 +60,8 @@ def ocr_testing(filename):
             for line in iter(proc.stdout.readline, ''):
                 image_text += line.rstrip() + '\n'
 
+            image_text = image_text.decode('utf-8')
+
             corrected_text = autocorrect.correct_text_block(image_text)
 
             if corrected_text is unicode:
