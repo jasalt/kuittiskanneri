@@ -26,7 +26,7 @@ def correct_word(word, cutoff):
 def correct_text_block(txt, cutoff=0.5):
     def __correct_line__(line):
         words = [correct_word(word.lower(), cutoff) for word in line.split(' ')]
-        return ' '.join(words)
+        return u' '.join(words)
     
     return '\n'.join([__correct_line__(line) for line in txt.splitlines()])
 
