@@ -8,8 +8,10 @@ def init(wordlist_filename):
     global WORDS
     if WORDS == None:
         WORDS = []
+        bad_line = lambda x: x.strip() == '' or x.startswith('#')
         with codecs.open(wordlist_filename, 'r', 'utf-8') as filehandle:
-            WORDS = set([x.lower().strip() for x in filehandle.readlines()])
+            lines = filehandle.readlines()
+            WORDS = set([x.lower().strip() for x in lines if not bad_line(x)])
 
 
 def correct_word(word, cutoff):
