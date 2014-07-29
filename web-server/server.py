@@ -62,6 +62,9 @@ def ocr_testing(filename):
 
             corrected_text = autocorrect.correct_text_block(image_text)
 
+            if corrected_text is unicode:
+                corrected_text = corrected_text.encode('utf-8')
+
             return '''
             <!doctype html>
             <pre>%s</pre>
