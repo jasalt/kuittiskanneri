@@ -138,5 +138,6 @@ biojätekassi
 hernekeitto
 valiojogurtti
 ruiseväs
+ruisevas
 tonnikalahiutale
 vedessä
