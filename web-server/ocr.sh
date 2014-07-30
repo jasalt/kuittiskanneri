@@ -4,7 +4,7 @@
 
 # Set tessdata parent directory
 
-if [[ "$unamestr" == 'Linux' ]]; then
+if [[ "$OSTYPE" == 'linux-gnu' ]]; then
     export TESSDATA_PREFIX=/root/dev/tess_source/tesseract-ocr/
 elif [[ "$unamestr" == 'FreeBSD' ]]; then
     # If Mac with homebrew Tesseract
@@ -13,7 +13,7 @@ fi
 
 #TEMP=$(mktemp /tmp/temporary-file.XXXXXXXX)
 
-BASE=~/tmp/tesstemp_$$
+BASE=/tmp/tesstemp_$$
 PIPE=$BASE.txt
 
 rm -f $PIPE
