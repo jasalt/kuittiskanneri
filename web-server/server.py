@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import json
 import pprint
 import subprocess
 from flask import Flask, request, redirect, url_for
@@ -61,7 +62,7 @@ def upload_file():
             # Process image with ImageMagick
             # convert input.jpg -resize 600x800 -blur 2 -lat 8x8-2% out.jpg
 
-            return unicode(optical_character_recognition(imagepath)[2])
+            return json.dumps(optical_character_recognition(imagepath)[2])
             #return redirect(url_for('uploaded_file',
             #                        filename=filename))
     # GET
