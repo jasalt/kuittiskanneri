@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
+from datetime import datetime
 
 testtext = u"""
 k-supermarket länsiväylä
@@ -41,6 +42,40 @@ def parse_float(txt):
         return None
 
 
+def parse_date(txt):
+    """ Returns None or parsed date as {h, m, D, M, Y}. """
+    date = None
+    clock = None
+
+    for word in txt.split(' '):
+        if date is None:
+            try:
+                date = datetime.strptime(word, "%d-%m-%Y")
+                continue
+            except ValueError:
+                pass
+
+            try:
+                date = datetime.strptime(word, "%d.%m.%Y")
+                continue
+            except ValueError:
+                pass
+        if clock is None:
+            try:
+                clock = datetime.strptime(word, "%H:%M")
+                continue
+            except ValueError:
+                pass
+
+    if date is not None and clock is not None:
+        return {'h': clock.hour,
+                'm': clock.minute,
+                'D': date.day,
+                'M': date.month,
+                'Y': date.year}
+    return None
+
+
 def parse_product_line(txt):
     """ Returns None or {name, price}
     Example: { name:'pirkka banaani', price: 0.75 }
@@ -66,15 +101,22 @@ def parse_product_line(txt):
 
 
 def parse_sum(txt):
-    """ Returns None or total sum as float (if possible) or as string. """
+    """ Returns None or total sum as float. """
     words = txt.split(' ')
     if len(words) >= 2:
         if words[0].startswith('yhtee'):
             # Try float parsing
             total_sum = parse_float(words[-1])
-            if total_sum is None:
-                total_sum = words[-1]
-            return total_sum
+            if total_sum is not None:
+                return total_sum
+    return None
+
+
+def parse_credit_card(txt):
+    """ Returns None or True. """
+    if txt.startswith('korttitapahtuma'):
+        return True
+    return None
 
 
 def preprocess(txt):
@@ -84,8 +126,19 @@ def preprocess(txt):
 
 def parse_receipt(txt):
     """ Parses receipt and returns parsed data. """
-    result = { 'products': [], 'total_sum': 0.0 }
-    for line in preprocess(txt):
+    result = { 'products': [],
+               'date': None,
+               'total_sum': None,
+               'shop_name': None,
+               'credit_card': False }
+
+    preprocessed_lines = preprocess(txt)
+    if len(preprocessed_lines) == 0:
+        return result
+
+    result['shop_name'] = preprocessed_lines[0]
+
+    for line in preprocessed_lines:
         parsed_product = parse_product_line(line)
         if parsed_product is not None:
             result['products'].append(parsed_product)
@@ -93,6 +146,14 @@ def parse_receipt(txt):
         parsed_sum = parse_sum(line)
         if parsed_sum is not None:
             result['total_sum'] = parsed_sum
+
+        parsed_card = parse_credit_card(line)
+        if parsed_card is not None:
+            result['credit_card'] = parsed_card
+
+        parsed_date = parse_date(line)
+        if parsed_date is not None:
+            result['date'] = parsed_date
 
     return result
 
@@ -138,9 +199,25 @@ class ParserTest(unittest.TestCase):
             self.assertEqual(parse_sum(inp), expected)
         # Valid sums
         test(u'yhteensä 15.62', 15.62)
-        test(u'yhteensä 6i.00', u'6i.00')
+        test(u'yhteensä 61.00', 61.00)
         # Invalid sums
+        test(u'yhteensä 6i 00', None)
+        test('', None)
+
+    def test_date(self):
+        """ Tests parse_date """
+        test = lambda inp, expected:\
+            self.assertEqual(parse_date(inp), expected)
+        # Valid dates
+        test('15:57 27-07-2014', {'h':15,'m':57, 'D':27,'M':7,'Y':2014})
+        test('16.07.2014 23:15', {'h':23,'m':15, 'D':16,'M':7,'Y':2014})
+        # Invalid dates
+        test('64:99 12-13-2014', None)
+        test('abc', None)
+        test(' ', None)
+        test('', None)
 
 
 if __name__ == '__main__':
     unittest.main()
+
