@@ -84,6 +84,16 @@ def ocr_testing(filename):
     '''
 
 
+@app.route('/js/<path:filename>')
+def web_static_js(filename):
+    return send_from_directory(os.path.join(STATIC_FOLDER, 'js'), filename)
+
+
+@app.route('/css/<path:filename>')
+def web_static_css(filename):
+    return send_from_directory(os.path.join(STATIC_FOLDER, 'css'), filename)
+
+
 @app.route('/')
 def web_app():
     print("static app")
