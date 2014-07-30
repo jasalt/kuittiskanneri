@@ -57,6 +57,10 @@ def upload_file():
                 os.mkdir(app.config['UPLOAD_FOLDER'])
             imagepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             image_file.save(imagepath)
+            # TODO:
+            # Process image with ImageMagick
+            # convert input.jpg -resize 600x800 -blur 2 -lat 8x8-2% out.jpg
+
             return unicode(optical_character_recognition(imagepath)[2])
             #return redirect(url_for('uploaded_file',
             #                        filename=filename))
