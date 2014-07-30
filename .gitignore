@@ -4,3 +4,4 @@ web-client/bower_components/
 tess_out.txt
 venv/
 web-server/uploads/
+.DS_Store
