@@ -3,12 +3,17 @@
 # Ensimmäinen parametri on kuvatiedosto
 
 # Set tessdata parent directory
-export TESSDATA_PREFIX=/root/dev/tess_source/tesseract-ocr/
 
+if [[ "$unamestr" == 'Linux' ]]; then
+    export TESSDATA_PREFIX=/root/dev/tess_source/tesseract-ocr/
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+    # If Mac with homebrew Tesseract
+    export TESSDATA_PREFIX=/usr/local/Cellar/tesseract/3.02.02_2/share/
+fi
 
 #TEMP=$(mktemp /tmp/temporary-file.XXXXXXXX)
 
-BASE=/tmp/tesstemp_$$
+BASE=~/tmp/tesstemp_$$
 PIPE=$BASE.txt
 
 rm -f $PIPE
