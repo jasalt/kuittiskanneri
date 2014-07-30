@@ -1,13 +1,15 @@
 import os
+import pprint
 import subprocess
 from flask import Flask, request, redirect, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
 import autocorrect
+import receiptparser
 
 # Store pics temporarily on api server
-OCR_SCRIPT = '/root/dev/tess_test/ocr.sh'
+OCR_SCRIPT = './ocr.sh'
 UPLOAD_FOLDER = 'uploads/'
 STATIC_FOLDER = '../web-client/'
 ALLOWED_EXTENSIONS = set(['png','jpg','jpeg','gif'])
@@ -67,10 +69,14 @@ def ocr_testing(filename):
             if corrected_text is unicode:
                 corrected_text = corrected_text.encode('utf-8')
 
+            parse_result = receiptparser.parse_receipt(corrected_text)
+
             return '''
             <!doctype html>
             <pre>%s</pre>
-            ''' % (corrected_text)
+            <hr>
+            <pre>%s</pre>
+            ''' % (corrected_text, pprint.pformat(parse_result))
 
     return '''
     <!doctype html>

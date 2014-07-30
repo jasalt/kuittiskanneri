@@ -18,7 +18,6 @@ def correct_word(word, cutoff):
     """ Autocorrects a word by using a pre-defined word list. """
     if WORDS is not None:
         result = difflib.get_close_matches(word, WORDS, n=1, cutoff=cutoff)
-        print result
         if len(result) > 0:
             return result[0]
 

@@ -1,4 +1,6 @@
 web-client/bower_components/
 *.log
+*.pyc
+tess_out.txt
 venv/
 web-server/uploads/
