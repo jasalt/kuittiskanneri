@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import autocorrect
 
 # Store pics temporarily on api server
-OCR_SCRIPT = '/root/dev/tess_test/ocr.sh'
+OCR_SCRIPT = './ocr.sh'
 UPLOAD_FOLDER = 'uploads/'
 STATIC_FOLDER = '../web-client/'
 ALLOWED_EXTENSIONS = set(['png','jpg','jpeg','gif'])
