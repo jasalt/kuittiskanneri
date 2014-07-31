@@ -17,7 +17,7 @@
       <title>ScannerApp</title>
 
       <link rel="stylesheet" href="css/style.css" type="text/css">
-      <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"> -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
       <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css"> -->
 
       <!--[if lt IE 9]>
@@ -29,10 +29,16 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    
+    <ul ng-controller="NavbarCtrl" class="nav nav-tabs">
+      <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
+      <li ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
+      <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+      <li><a>Kuittiskanneriapp</a></li>
+    </ul>
 
-    <div ng-view></div>
-
-    <h1>The Kuittiskanneri App</h1>
+    <div class="container"><div ng-view></div></div>
+    
 
     <!-- Load libs -->
     <script src="js/libs/angular-file-upload-html5-shim.js"></script>

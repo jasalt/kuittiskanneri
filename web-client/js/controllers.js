@@ -20,7 +20,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     //method: 'POST' or 'PUT',
                     //headers: {'header-key': 'header-value'},
                     //withCredentials: true,
-                    data: {myObj: $scope.myModelObj},
+                    //data: {myObj: $scope.myModelObj},
                     file: file, // or list of files ($files) for html5 only
                     //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
                     // customize file formData name ('Content-Desposition'), server side file variable name.
@@ -31,9 +31,12 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                 }).success(function(data, status, headers, config) {
                     // file is uploaded successfully
+                    console.log("Upload success, response data:");
                     console.log(data);
+                }).error(function(er) {
+                    console.log(er);
+                    
                 });
-                //.error(...)
                 //.then(success, error, progress);
                 // access or attach event listeners to the underlying XMLHttpRequest.
                 //.xhr(function(xhr){xhr.upload.addEventListener(...)})
@@ -46,4 +49,25 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     }])
     .controller('ReceiptCtrl', ['$scope', function($scope) {
         console.log("viewing receipt");
+    }])
+    .controller('AboutCtrl', ['$scope', function($scope) {
+        console.log("viewing about page");
+    }])
+    .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
+        $scope.isActive = function(viewLocation) {
+            return viewLocation === $location.path();
+        };
     }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
