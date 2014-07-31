@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('HomeCtrl', ['$scope', function($scope) {
         console.log("welcome home");
@@ -49,6 +48,10 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('ReceiptCtrl', ['$scope', 'currentReceipt', function($scope, currentReceipt) {
         $scope.receipt = currentReceipt.getReceipt();
         console.log("viewing receipt");
+
+        $scope.changePaymentType = function() {
+            $scope.receipt.credit_card = !$scope.receipt.credit_card;
+        };
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
         console.log("viewing about page");

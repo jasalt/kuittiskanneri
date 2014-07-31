@@ -13,3 +13,8 @@ canvas {
     height: 100px;
     margin: 6px 0 0 6px;
 }
+
+/* Add some space to product list */
+.receipt-product-row {
+    margin-bottom: 20px;
+}
