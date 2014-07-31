@@ -18,3 +18,32 @@ canvas {
 .receipt-product-row {
     margin-bottom: 20px;
 }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.upload-drop-box {
+    margin-top: 15px;
+    margin-left: 20px;
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 35px;
+    color: gray;
+}
