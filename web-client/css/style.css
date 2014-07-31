@@ -47,3 +47,11 @@ canvas {
     padding-top: 35px;
     color: gray;
 }
+
+.upload-drop-box-dragover {
+    border: 5px dashed blue;
+}
+
+.upload-drop-box-dragover-err {
+    background-color: red;
+}

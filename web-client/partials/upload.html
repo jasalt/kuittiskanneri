@@ -3,7 +3,7 @@
   <span>Select file or use mobile camera</span>
   <input type="file" class="upload" ng-file-select="onFileSelect($files)">
 </div>
-<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function"
+<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)"
      ng-show="dropSupported" class="upload-drop-box">drop files here</div>
 <div ng-file-drop-available="dropSupported=true"
      ng-show="!dropSupported">HTML5 Drop File is not supported!</div>

@@ -44,6 +44,24 @@ angular.module('myApp.controllers', ['angularFileUpload'])
              It could also be used to monitor the progress of a normal http post/put request with large data*/
             // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
         };
+        /*
+         * Change drop-box area class when dragging file
+         */
+        $scope.dragOverClass = function($event) {
+	    var items = $event.dataTransfer.items;
+	    var hasFile = false;
+	    if (items != null) {
+		for (var i = 0 ; i < items.length; i++) {
+		    if (items[i].kind == 'file') {
+			hasFile = true;
+			break;
+		    }
+		}
+	    } else {
+		hasFile = true;
+	    }
+	    return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
+	};
     }])
     .controller('ReceiptCtrl', ['$scope', 'currentReceipt', function($scope, currentReceipt) {
         $scope.receipt = currentReceipt.getReceipt();
