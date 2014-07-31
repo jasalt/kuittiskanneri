@@ -8,6 +8,7 @@ angular.module('myApp', [
 ]).
     config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+        $routeProvider.when('/upload', {templateUrl: 'partials/upload.html', controller: 'UploadCtrl'});
         $routeProvider.when('/receipt', {templateUrl: 'partials/receipt.html', controller: 'ReceiptCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
