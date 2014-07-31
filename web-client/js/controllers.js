@@ -5,10 +5,8 @@
 angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('HomeCtrl', ['$scope', function($scope) {
         console.log("welcome home");
-
-
     }])
-    .controller('UploadCtrl', ['$scope', '$upload', function($scope, $upload) {
+    .controller('UploadCtrl', ['$scope', '$upload', '$location', 'currentReceipt', function($scope, $upload, $location, currentReceipt) {
         console.log("ready to upload");
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
@@ -31,11 +29,12 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                 }).success(function(data, status, headers, config) {
                     // file is uploaded successfully
-                    console.log("Upload success, response data:");
+                    console.log("Upload success, redirecting, response data:");
                     console.log(data);
+                    currentReceipt.setReceipt(data);
+                    $location.path("/receipt");
                 }).error(function(er) {
                     console.log(er);
-                    
                 });
                 //.then(success, error, progress);
                 // access or attach event listeners to the underlying XMLHttpRequest.
@@ -47,7 +46,8 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
         };
     }])
-    .controller('ReceiptCtrl', ['$scope', function($scope) {
+    .controller('ReceiptCtrl', ['$scope', 'currentReceipt', function($scope, currentReceipt) {
+        $scope.receipt = currentReceipt.getReceipt();
         console.log("viewing receipt");
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
