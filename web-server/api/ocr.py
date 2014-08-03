@@ -1,9 +1,18 @@
+import os
+import subprocess
+import autocorrect
+import receiptparser
+
+
+UPLOAD_FOLDER = 'uploads/'
+OCR_SCRIPT = './../ocr.sh'
+
 def optical_character_recognition(imagepath):
     """ Does OCR on an image and returns tuple:
         (raw text, autocorrected text, parsed receipt data) """
 
     # Process image with ImageMagick
-    tempimagepath = os.path.join(app.config['UPLOAD_FOLDER'], 'temp.png')
+    tempimagepath = os.path.join(UPLOAD_FOLDER, 'temp.png')
     im_proc = subprocess.Popen(['convert',imagepath,'-resize','600x800',
                                 '-blur','2','-lat','8x8-2%',tempimagepath],
                                 stdout=subprocess.PIPE)

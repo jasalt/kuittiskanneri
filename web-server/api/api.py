@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import json
-#import pprint
-#import subprocess
 from flask import Flask, request
 from flask.ext import restful
 from flask.ext.restful import reqparse
@@ -12,14 +10,9 @@ from werkzeug.utils import secure_filename
 from utils import allowed_file
 from ocr import optical_character_recognition
 
-#import autocorrect
-#import receiptparser
-
 # Store pics temporarily on api server
-OCR_SCRIPT = './ocr.sh'
 UPLOAD_FOLDER = 'uploads/'
 STATIC_FOLDER = '../../web-client/'
-ALLOWED_EXTENSIONS = set(['png','jpg','jpeg','gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -55,7 +48,9 @@ class Upload(restful.Resource):
             # Process image with ImageMagick
             # convert input.jpg -resize 600x800 -blur 2 -lat 8x8-2% out.jpg
 
-            return json.dumps(optical_character_recognition(imagepath)[2])
+            return {'jee': 'asdf'}
+        #json.dumps(optical_character_recognition(imagepath)[2])
+        
             #return redirect(url_for('uploaded_file',
             #                        filename=filename))
 
@@ -87,22 +82,25 @@ class Receipts(restful.Resource):
 
 api.add_resource(Receipts, '/api/receipts')
 
-##TODO ->>
+
 class User(restful.Resource):
     def get(self):
         ''' Return user data '''
         #TODO get authenticated user id from request
-        return {'id': '123', 'data': 'GET user mocked'}
+        args = parser.parse_args()
+        return {'id': args.id, 'data': 'GET user mocked'}
 
     def post(self):
         ''' Create new user '''
-        return {'id': '123', 'username': 'Johnny DROP TABLE USERS;'}
+        args = parser.parse_args()
+        return {'id': args.id, 'username': 'Johnny DROP TABLE USERS;'}
 
 
     def update(self):
         ''' Update user data'''
         #TODO get authenticated user id from request
-        return {'id': '123', 'username': 'Johnny sudo reboot'}
+        args = parser.parse_args()
+        return {'id': args.id, 'username': 'Johnny sudo reboot'}
 
 
 '''

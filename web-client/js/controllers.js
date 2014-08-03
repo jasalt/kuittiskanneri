@@ -13,7 +13,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
                 $scope.upload = $upload.upload({
-                    url: '/upload', //upload.php script, node.js route, or servlet url
+                    url: '/api/upload', //upload.php script, node.js route, or servlet url
                     //method: 'POST' or 'PUT',
                     //headers: {'header-key': 'header-value'},
                     //withCredentials: true,
