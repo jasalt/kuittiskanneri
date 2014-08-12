@@ -31,12 +31,11 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     console.log("Upload success, redirecting, response data:");
                     console.log(data);
                     currentReceipt.setReceipt(data);
-                    $location.path("/receipt");
                     $scope.loading = false;
-
-
+                    $location.path("/receipt");
                 }).error(function(er) {
                     console.log(er);
+                    $scope.loading = false;
                 });
                 //.then(success, error, progress);
                 // access or attach event listeners to the underlying XMLHttpRequest.
