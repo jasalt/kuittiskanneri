@@ -5,8 +5,13 @@
 # Set tessdata parent directory
 
 if [[ "$OSTYPE" == 'linux-gnu' ]]; then
-    export TESSDATA_PREFIX=/root/dev/tess_source/tesseract-ocr/
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
+    if [[ `hostname` == 'jasalt-tp' ]]; then
+        export TESSDATA_PREFIX=/usr/share/tesseract-ocr/
+    else
+        export TESSDATA_PREFIX=/root/dev/tess_source/tesseract-ocr/
+    fi
+fi
+if [[ "$unamestr" == 'FreeBSD' ]]; then
     # If Mac with homebrew Tesseract
     export TESSDATA_PREFIX=/usr/local/Cellar/tesseract/3.02.02_2/share/
 fi
@@ -22,4 +27,3 @@ mkfifo $PIPE
 tesseract -l fin $1 $BASE nobatch kuitti > tess_out.txt 2>&1 &
 cat $PIPE
 rm -f $PIPE
-
