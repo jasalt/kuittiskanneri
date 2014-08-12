@@ -8,4 +8,10 @@
 <div ng-file-drop-available="dropSupported=true"
      ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
 
+<div ng-show="loading">
+  <div class="loading"><img src="img/ajax-loader.gif"/></div>
+  <p ng-show="uploadPercent!=100">Upload in progress: {{uploadPercent}}%</p>
+  <p ng-show="uploadPercent==100">Upload finished, waiting OCR...</p>
+</div>
+
 <!-- <button ng-click="upload.abort()">Cancel Upload</button> -->

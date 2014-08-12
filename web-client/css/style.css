@@ -1,9 +1,18 @@
-.my-drop-zone { border: dotted 3px lightgray; }
-.ng-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
-.another-file-over-class { border: dotted 3px green; }
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+.ng-file-over {
+    border: dotted 3px red;
+}
+/* Default class applied to drop zones on over */
 
-html, body { height: 100%; }
-
+.another-file-over-class {
+    border: dotted 3px green;
+}
+html,
+body {
+    height: 100%;
+}
 canvas {
     background-color: #f3f3f3;
     -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
@@ -13,12 +22,11 @@ canvas {
     height: 100px;
     margin: 6px 0 0 6px;
 }
-
 /* Add some space to product list */
+
 .receipt-product-row {
     margin-bottom: 20px;
 }
-
 .fileUpload {
     position: relative;
     overflow: hidden;
@@ -35,7 +43,6 @@ canvas {
     opacity: 0;
     filter: alpha(opacity=0);
 }
-
 .upload-drop-box {
     margin-top: 15px;
     margin-left: 20px;
@@ -47,11 +54,14 @@ canvas {
     padding-top: 35px;
     color: gray;
 }
-
 .upload-drop-box-dragover {
     border: 5px dashed blue;
 }
-
 .upload-drop-box-dragover-err {
     background-color: red;
+}
+.loading {
+    /* padding: 20px; */
+    margin-top: 15px;
+    /* width: 80px; */
 }
