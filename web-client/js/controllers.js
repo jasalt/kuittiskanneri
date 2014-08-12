@@ -3,12 +3,11 @@
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('HomeCtrl', ['$scope', function($scope) {
-        console.log("welcome home");
     }])
     .controller('UploadCtrl', ['$scope', '$upload', '$location', 'currentReceipt', function($scope, $upload, $location, currentReceipt) {
-        console.log("ready to upload");
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
+            $scope.loading = true;
             //$files: an array of files selected, each file has name, size, and type.
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
@@ -18,7 +17,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     //headers: {'header-key': 'header-value'},
                     //withCredentials: true,
                     //data: {myObj: $scope.myModelObj},
-                    file: file, // or list of files ($files) for html5 only
+                    file: file  // or list of files ($files) for html5 only
                     //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
                     // customize file formData name ('Content-Desposition'), server side file variable name.
                     //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
@@ -26,12 +25,16 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     //formDataAppender: function(formData, key, val){}
                 }).progress(function(evt) {
                     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                    $scope.uploadPercent =  parseInt(100.0 * evt.loaded / evt.total);
                 }).success(function(data, status, headers, config) {
                     // file is uploaded successfully
                     console.log("Upload success, redirecting, response data:");
                     console.log(data);
                     currentReceipt.setReceipt(data);
                     $location.path("/receipt");
+                    $scope.loading = false;
+
+
                 }).error(function(er) {
                     console.log(er);
                 });
@@ -65,14 +68,12 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     }])
     .controller('ReceiptCtrl', ['$scope', 'currentReceipt', function($scope, currentReceipt) {
         $scope.receipt = currentReceipt.getReceipt();
-        console.log("viewing receipt");
 
         $scope.changePaymentType = function() {
             $scope.receipt.credit_card = !$scope.receipt.credit_card;
         };
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
-        console.log("viewing about page");
     }])
     .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
         $scope.isActive = function(viewLocation) {
