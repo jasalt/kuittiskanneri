@@ -4,7 +4,7 @@
 angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('HomeCtrl', ['$scope', function($scope) {
     }])
-    .controller('UploadCtrl', ['$scope', '$upload', '$location', 'currentReceipt', function($scope, $upload, $location, currentReceipt) {
+    .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService', function($scope, $upload, $location, receiptService) {
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
             $scope.loading = true;
@@ -12,7 +12,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
                 $scope.upload = $upload.upload({
-                    url: '/api/upload', //upload.php script, node.js route, or servlet url
+                    url: '/api/upload',
                     //method: 'POST' or 'PUT',
                     //headers: {'header-key': 'header-value'},
                     //withCredentials: true,
@@ -30,7 +30,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
                     // file is uploaded successfully
                     console.log("Upload success, redirecting, response data:");
                     console.log(data);
-                    currentReceipt.setReceipt(data);
+                    receiptService.setReceipt(data);
                     $scope.loading = false;
                     $location.path("/receipt");
                 }).error(function(er) {
@@ -47,7 +47,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
         };
         /*
-         * Change drop-box area class when dragging file
+         * Change drop-box area css class when dragging file
          */
         $scope.dragOverClass = function($event) {
 	    var items = $event.dataTransfer.items;
@@ -65,8 +65,8 @@ angular.module('myApp.controllers', ['angularFileUpload'])
 	    return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
 	};
     }])
-    .controller('ReceiptCtrl', ['$scope', 'currentReceipt', function($scope, currentReceipt) {
-        $scope.receipt = currentReceipt.getReceipt();
+    .controller('ReceiptCtrl', ['$scope', 'receiptService', function($scope, receiptService) {
+        $scope.receipt = receiptService.getReceipt();
 
         $scope.changePaymentType = function() {
             $scope.receipt.credit_card = !$scope.receipt.credit_card;
