@@ -50,20 +50,20 @@ angular.module('myApp.controllers', ['angularFileUpload'])
          * Change drop-box area css class when dragging file
          */
         $scope.dragOverClass = function($event) {
-	    var items = $event.dataTransfer.items;
-	    var hasFile = false;
-	    if (items != null) {
-		for (var i = 0 ; i < items.length; i++) {
-		    if (items[i].kind == 'file') {
-			hasFile = true;
-			break;
-		    }
-		}
-	    } else {
-		hasFile = true;
-	    }
-	    return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
-	};
+            var items = $event.dataTransfer.items;
+            var hasFile = false;
+            if (items != null) {
+                for (var i = 0 ; i < items.length; i++) {
+                    if (items[i].kind == 'file') {
+                        hasFile = true;
+                        break;
+                    }
+                }
+            } else {
+                hasFile = true;
+            }
+            return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
+        };
     }])
     .controller('ReceiptCtrl', ['$scope', 'receiptService', function($scope, receiptService) {
         $scope.receipt = receiptService.getReceipt();
@@ -74,21 +74,17 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
     }])
+    .controller('IndexCtrl', ['$scope', 'userService', function($scope, userService) {
+        // Login and register dialogs, redirect if user already logged in
+        console.log("LoginCtrl active");
+
+        $scope.submitRegisterForm = function() {
+            console.log("Send register pyyntö to API");
+            userService.registerUser($scope.username, $scope.password);
+        };
+    }])
     .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();
         };
     }]);
-
-
-
-
-
-
-
-
-
-
-
-
-

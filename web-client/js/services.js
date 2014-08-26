@@ -24,3 +24,84 @@ app.service('receiptService', function() {
         this.receipt = rcpt;
     };
 });
+//TODO inject http service properly here or on the top line??
+app.service('userService', function($http) {
+
+    this.user = null;
+
+    // this.receipt = this.mockReceipt;
+    // this.getUser = function() {
+    //     $http({method: 'GET', url: '/api/user/'}).
+    //         success(function(data, status, headers, config) {
+    //             // this callback will be called asynchronously
+    //             // when the response is available
+    //         }).
+    //         error(function(data, status, headers, config) {
+    //             // called asynchronously if an error occurs
+    //             // or server returns response with an error status.
+    //         });
+    //     return this.user;
+    // };
+
+    this.loginUser = function(username, password) {
+        //debugger;
+        $http({method: 'GET', url: '/api/user/'}).
+            success(function(data, status, headers, config) {
+                console.log("Login OK!");
+                // this callback will be called asynchronously
+                // when the response is available
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            }).
+            error(function(data, status, headers, config) {
+                console.log("Login Error:");
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            });
+        // HTTP Post /api/user/
+        // {'username': username, 'password': password}
+        // TODO create http-request function.
+    };
+
+    this.registerUser = function(username, password) {
+        debugger;
+        $http({method: 'POST', url: '/api/user/',
+               data: {
+                   username: username,
+                   password: password}}).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            }).
+            error(function(data, status, headers, config) {
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            });
+        // HTTP Post /api/user/
+        // {'username': username, 'password': password}
+        // TODO create http-request function.
+    };
+
+    this.updatePassword = function(newPassword) {
+        $http({method: 'UPDATE', url: '/api/user/'}).
+            success(function(data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        // HTTP Post /api/user/
+        // {'username': username, 'password': password}
+        // TODO create http-request function.
+    };
+});

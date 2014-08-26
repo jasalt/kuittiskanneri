@@ -7,7 +7,8 @@ angular.module('myApp', [
     'myApp.controllers'
 ]).
     config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+        $routeProvider.when('/', {templateUrl: 'partials/index.html', controller: 'IndexCtrl'});
+        $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
         $routeProvider.when('/upload', {templateUrl: 'partials/upload.html', controller: 'UploadCtrl'});
         $routeProvider.when('/receipt', {templateUrl: 'partials/receipt.html', controller: 'ReceiptCtrl'});
         $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
