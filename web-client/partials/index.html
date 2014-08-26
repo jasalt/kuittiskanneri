@@ -1,12 +1,14 @@
 <h2>Register a new account</h2>
-<form ng-submit="submitRegisterForm()">
+<form ng-if="!registerOk" ng-submit="submitRegisterForm()">
   <div class="form-group">
-    <label for="username-input">Username</label>
-    <input ng-model="username" type="text" class="form-control" id="username-input" placeholder="Enter username">
+    <label for="username-input">Username {{username}}</label>
+    <input ng-model="$parent.username" type="text" class="form-control" id="username-input" placeholder="Enter username">
   </div>
   <div class="form-group">
     <label for="password-input">Password</label>
-    <input ng-model="password" type="password" class="form-control" id="password-input" placeholder="Password">
+    <input ng-model="$parent.password" type="password" class="form-control" id="password-input" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
+
+<h3 ng-if="registerOk">Registration successful! Redirecting to application.</h3>
