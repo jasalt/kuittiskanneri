@@ -27,15 +27,15 @@ app.service('receiptService', function() {
 //TODO inject http service properly here or on the top line??
 app.service('userService', function($http, $location, $timeout) {
 
-    var user = {};
+    var user = null;
 
-    function getUser() {
+    this.getUser = function() {
         return user;
-    }
+    };
 
-    function setUser(newUser){
-        user = newUser;
-    }
+    // this.setUser(newUser){
+    //     user = newUser;
+    // }
 
     this.loginUser = function(username, password) {
         //debugger;

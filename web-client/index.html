@@ -35,6 +35,9 @@
       <li ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
       <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
       <li><a>Kuittiskanneriapp</a></li>
+      <li class="pull-right" ng-if="user"><a>{{user}}</a></li>
+      
+      
     </ul>
 
     <div class="container"><div ng-view></div></div>

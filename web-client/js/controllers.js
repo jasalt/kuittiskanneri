@@ -80,6 +80,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         $scope.registerOk = null; // If user registration is OK show ui feedback
         //$scope.username = null;
         //$scope.password = null;
+        var user = userService.getUser();
         $scope.submitRegisterForm = function() {
             console.log("Register user " + $scope.username);
             userService.registerUser($scope.username, $scope.password);
@@ -87,12 +88,16 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             //userService.setUser($scope.user.name, $scope.user.pwhash);
         };
 
+
         // $timeout(function() {
         //     $location.path('/home');
         // }, 2000);
     })
-    .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
+    .controller('NavbarCtrl', function($scope, $location, userService) {
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();
         };
-    }]);
+        console.log("User is loggedin!");
+        // TODO get information about change from message as this value is not updated
+        $scope.user = userService.getUser();
+    });
