@@ -74,15 +74,23 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
     }])
-    .controller('IndexCtrl', ['$scope', 'userService', function($scope, userService) {
-        // Login and register dialogs, redirect if user already logged in
-        console.log("LoginCtrl active");
-
+    .controller('IndexCtrl', function($scope, $timeout, $location, userService) {
+        // Register dialog,
+        // TODO redirect if user already logged in
+        $scope.registerOk = null; // If user registration is OK show ui feedback
+        //$scope.username = null;
+        //$scope.password = null;
         $scope.submitRegisterForm = function() {
-            console.log("Send register pyyntö to API");
+            console.log("Register user " + $scope.username);
             userService.registerUser($scope.username, $scope.password);
+            
+            //userService.setUser($scope.user.name, $scope.user.pwhash);
         };
-    }])
+
+        // $timeout(function() {
+        //     $location.path('/home');
+        // }, 2000);
+    })
     .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();

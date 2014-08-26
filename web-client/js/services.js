@@ -25,23 +25,17 @@ app.service('receiptService', function() {
     };
 });
 //TODO inject http service properly here or on the top line??
-app.service('userService', function($http) {
+app.service('userService', function($http, $location, $timeout) {
 
-    this.user = null;
+    var user = {};
 
-    // this.receipt = this.mockReceipt;
-    // this.getUser = function() {
-    //     $http({method: 'GET', url: '/api/user/'}).
-    //         success(function(data, status, headers, config) {
-    //             // this callback will be called asynchronously
-    //             // when the response is available
-    //         }).
-    //         error(function(data, status, headers, config) {
-    //             // called asynchronously if an error occurs
-    //             // or server returns response with an error status.
-    //         });
-    //     return this.user;
-    // };
+    function getUser() {
+        return user;
+    }
+
+    function setUser(newUser){
+        user = newUser;
+    }
 
     this.loginUser = function(username, password) {
         //debugger;
@@ -68,22 +62,17 @@ app.service('userService', function($http) {
     };
 
     this.registerUser = function(username, password) {
-        debugger;
         $http({method: 'POST', url: '/api/user/',
                data: {
-                   username: username,
-                   password: password}}).
+                   'username': username,
+                   'password': password}}).
             success(function(data, status, headers, config) {
-                console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
+                user = {'name': data['username'], 'pwhash': data['pwhash']};
+                $location.path('/home');
             }).
             error(function(data, status, headers, config) {
+                console.log("something wrong with registration.. duplicate user maybe");
                 console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
             });
         // HTTP Post /api/user/
         // {'username': username, 'password': password}
