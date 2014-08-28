@@ -27,17 +27,32 @@ app.service('receiptService', function() {
 app.service('userService', function($http, $location, $timeout, $cookies) {
 
     var user = null;
+    var userhash = null;
 
     this.getUser = function() {
         return user;
     };
 
-    // this.setUser(newUser){
-    //     user = newUser;
-    // }
+    this.setUser = function(username, pwhash){
+        // validate login cookie with api
+        $http({method: 'POST', url: '/api/verifycookie/',
+               data: {'username': username, 'pwhash': pwhash}}).
+            success(function(data, status, headers, config) {
+                //set user
+                user = username;
+                userhash = pwhash;
+                console.log("Login verified OK!");
+            }).
+            error(function(data, status, headers, config) {
+                console.log("Validation error, removing cookies.");
+                $cookies.currentUser = "";
+                $cookies.currentUserHash = "";
+            });
+
+    };
 
     this.loginUser = function(username, password) {
-        //debugger;
+        debugger;
         $http({method: 'GET', url: '/api/user/'}).
             success(function(data, status, headers, config) {
                 console.log("Login OK!");

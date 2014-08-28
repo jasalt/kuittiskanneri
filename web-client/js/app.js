@@ -1,11 +1,21 @@
 var login = angular.module('myLoginCheck', []).
-        factory('$logincheck', function($cookies){
+        factory('$logincheck', function($cookies, $http, userService){
+            // Runs when entering the application
+            // Check user login status
             return function(){
-                //Perform logical user loging check by looking at cookies
+                // Check cookies
                 var user = $cookies.currentUser;
-                console.log("logged user:" + user);
-                if(user) return true; //TODO
-                return false;
+                var pwhash = $cookies.currentUserHash;
+
+                if(!user) {
+                    console.log("No login cookie found.");
+                    return false;
+                }
+
+                // Validate cookie with server
+
+                userService.setUser(user, pwhash);
+                return true;
             };
         });
 
