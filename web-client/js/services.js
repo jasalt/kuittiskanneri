@@ -83,7 +83,7 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
             success(function(data, status, headers, config) {
                 user = {'name': data['username'], 'pwhash': data['pwhash']};
                 
-                $cookies.currentUser = data['username'];
+                $cookies.currentUser = username;
                 $cookies.currentUserHash = data['pwhash'];
                 
                 $location.path('/home');
@@ -95,6 +95,16 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
         // HTTP Post /api/user/
         // {'username': username, 'password': password}
         // TODO create http-request function.
+    };
+
+    this.logout = function() {
+        $cookies.currentUser = '';
+        $cookies.currentUserHash = '';
+        user = null;
+        userhash = null;
+        
+        $location.path('/index');
+
     };
 
     this.updatePassword = function(newPassword) {

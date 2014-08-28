@@ -31,14 +31,17 @@
         <![endif]-->
 
     <ul ng-controller="NavbarCtrl" class="nav nav-tabs">
-      <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li>
-      <li ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
-      <li ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
-      <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
-      <li ng-class="{ active: isActive('/register')}"><a href="#/register">Register</a></li>
-      <li><a>Kuittiskanneriapp</a></li>
-      <li class="pull-right" ng-if="user"><a>{{user}}</a></li>
 
+      <li ng-if="user" ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
+      <li ng-if="user" ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
+
+      <li ng-if="!user" ng-class="{ active: isActive('/register')}"><a href="#/register">Register</a></li>
+      <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+
+   <!-- <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li> -->
+
+   <button ng-if="user" class="btn btn-danger pull-right" ng-click="logout()">Logout {{user.name}}</button>
+   <button ng-if="!user" class="btn btn-default pull-right" ng-click="login()">Login</button>
 
     </ul>
 

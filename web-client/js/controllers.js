@@ -106,8 +106,21 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         };
         // TODO get information about change from message as this value is not updated
         // listen for changes in location or messages and re-query
-        $scope.user = userService.getUser();
+        
+        $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
+            $scope.user = userService.getUser();
+        });
         if ($scope.user) {
             console.log("User is loggedin!");
+        } else {
+            console.log("Not logged in.");
+            
         }
+
+        $scope.logout = function() {
+            alert("logging out");
+            userService.logout();
+        };
+
+        
     });
