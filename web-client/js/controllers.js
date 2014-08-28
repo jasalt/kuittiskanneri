@@ -109,13 +109,15 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         
         $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
             $scope.user = userService.getUser();
+            console.log("route change");
+            if ($scope.user) {
+                console.log("User is loggedin!");
+                console.log($scope.user);
+            } else {
+                console.log("Not logged in.");
+            }
         });
-        if ($scope.user) {
-            console.log("User is loggedin!");
-        } else {
-            console.log("Not logged in.");
-            
-        }
+        
 
         $scope.logout = function() {
             alert("logging out");

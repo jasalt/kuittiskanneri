@@ -52,7 +52,7 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
     };
 
     this.loginUser = function(username, password) {
-        debugger;
+        
         $http({method: 'GET', url: '/api/user/'}).
             success(function(data, status, headers, config) {
                 console.log("Login OK!");
@@ -81,9 +81,10 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
                    'username': username,
                    'password': password}}).
             success(function(data, status, headers, config) {
-                user = {'name': data['username'], 'pwhash': data['pwhash']};
+                user = data['username'];
+                userhash = data['pwhash'];
                 
-                $cookies.currentUser = username;
+                $cookies.currentUser = data['username'];
                 $cookies.currentUserHash = data['pwhash'];
                 
                 $location.path('/home');
