@@ -29,25 +29,28 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    
+
     <ul ng-controller="NavbarCtrl" class="nav nav-tabs">
-      <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
+      <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li>
+      <li ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
       <li ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
       <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
+      <li ng-class="{ active: isActive('/register')}"><a href="#/register">Register</a></li>
       <li><a>Kuittiskanneriapp</a></li>
       <li class="pull-right" ng-if="user"><a>{{user}}</a></li>
-      
-      
+
+
     </ul>
 
     <div class="container"><div ng-view></div></div>
-    
+
 
     <!-- Load libs -->
     <script src="js/libs/angular-file-upload-html5-shim.js"></script>
     <script src="js/libs/jquery.js"></script>
     <script src="js/libs/angular.js"></script>
     <script src="js/libs/angular-route.js"></script>
+    <script src="js/libs/angular-cookies.js"></script>
     <script src="js/libs/bootstrap.js"></script>
     <script src="js/libs/angular-file-upload.js"></script>
 

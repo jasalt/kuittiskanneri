@@ -75,19 +75,26 @@ angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('AboutCtrl', ['$scope', function($scope) {
     }])
     .controller('IndexCtrl', function($scope, $timeout, $location, userService) {
-        // Register dialog,
+        console.log("index");
+    })
+    .controller('RegisterCtrl', function($scope, $timeout, $location, userService) {
+        // Register dialog
+
+        if (userService.getUser()){
+            console.log("already logged in!@#");
+        }
+
         // TODO redirect if user already logged in
         $scope.registerOk = null; // If user registration is OK show ui feedback
         //$scope.username = null;
         //$scope.password = null;
         var user = userService.getUser();
         $scope.submitRegisterForm = function() {
-            console.log("Register user " + $scope.username);
+            console.log("Registering user " + $scope.username);
             userService.registerUser($scope.username, $scope.password);
-            
+
             //userService.setUser($scope.user.name, $scope.user.pwhash);
         };
-
 
         // $timeout(function() {
         //     $location.path('/home');
@@ -97,7 +104,10 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();
         };
-        console.log("User is loggedin!");
         // TODO get information about change from message as this value is not updated
+        // listen for changes in location or messages and re-query
         $scope.user = userService.getUser();
+        if ($scope.user) {
+            console.log("User is loggedin!");
+        }
     });

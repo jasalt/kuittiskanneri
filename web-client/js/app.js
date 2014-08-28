@@ -1,11 +1,13 @@
-var login = angular.module('myLoginCheck',[]).
-factory('$logincheck', function(){
-  return function(userid){
-  //Perform logical user loging check either by looking at cookies or make a call to server
-  if(userid > 0) return true; //TODO
-  return false;
-  };
-});
+var login = angular.module('myLoginCheck', []).
+        factory('$logincheck', function($cookies){
+            return function(){
+                //Perform logical user loging check by looking at cookies
+                var user = $cookies.currentUser;
+                console.log("logged user:" + user);
+                if(user) return true; //TODO
+                return false;
+            };
+        });
 
 
 // Declare app level module which depends on filters, and services
@@ -28,5 +30,15 @@ angular.module('myApp', [
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .run(function($logincheck, $location) {
-        console.log("User logged in: ", $logincheck(5));
+
+        if( $logincheck())
+        {
+            console.log("User logged in, redirecting to home");
+            $location.path('/home');
+        }
+        else
+        {
+            console.log("User not logged in, redirecting to index");
+            $location.path('/');
+        }
     });

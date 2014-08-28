@@ -3,7 +3,6 @@
 /* Services */
 
 var app = angular.module('myApp.services', []);
-
 app.service('receiptService', function() {
     /*
      * Provide receipt data between different controllers.
@@ -25,7 +24,7 @@ app.service('receiptService', function() {
     };
 });
 //TODO inject http service properly here or on the top line??
-app.service('userService', function($http, $location, $timeout) {
+app.service('userService', function($http, $location, $timeout, $cookies) {
 
     var user = null;
 
@@ -68,6 +67,10 @@ app.service('userService', function($http, $location, $timeout) {
                    'password': password}}).
             success(function(data, status, headers, config) {
                 user = {'name': data['username'], 'pwhash': data['pwhash']};
+                
+                $cookies.currentUser = data['username'];
+                $cookies.currentUserHash = data['pwhash'];
+                
                 $location.path('/home');
             }).
             error(function(data, status, headers, config) {
