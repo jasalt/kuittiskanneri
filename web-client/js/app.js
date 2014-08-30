@@ -27,13 +27,14 @@ angular.module('myApp', [
         $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
     }])
-    .run(function($logincheck, $location, $cookies) {
+    .run(function($logincheck, $location, $cookies, userService) {
         if (!$cookies.authdata) {
             console.log("User not logged in, redirecting to index");
             $location.path('/');
         } else
         {
-            console.log("User logged in, redirecting to home");
+            console.log("Cookie found, logging in");
+            userService.loginUser();
             $location.path('/home');
         }
     });

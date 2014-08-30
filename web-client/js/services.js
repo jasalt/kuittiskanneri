@@ -29,7 +29,6 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
     //var userhash = null;
     if ($cookies.authdata){
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookies.authdata;
-        debugger;
     }
 
     this.getUsername = function() {
@@ -47,7 +46,7 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
             
             delete $cookies['authdata'];
             document.execCommand("ClearAuthenticationCache");
-            $http.defaults.headers.common['Authorization'] = 'Basic ';
+            delete $http.defaults.headers.common['Authorization'];
 
         } else {
             console.log("Login verified OK!");
@@ -67,7 +66,6 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
      */
     this.checkCookie = function(){
         // Check that cookies exist
-        debugger;
         if (!$cookies.authdata) {
             console.log("No login cookie found.");
             return false;
@@ -97,11 +95,10 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
      * Login user to API with credentials.
      * Open browser basic auth login dialog.
      */
-    this.loginUser = function(username, password) {
+    this.loginUser = function() {
         $http({method: 'GET', url: '/api/user/'}).
             success(function(data, status, headers, config) {
                 console.log("Login OK!");
-                debugger;
                 setUser(data['_id'], data['pw_hash']);
                 $location.path('/home');
             }).
