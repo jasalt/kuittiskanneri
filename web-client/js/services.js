@@ -37,43 +37,55 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
      * http request content for basic auth
      */
     var setUser = function(username, pwhash){
-        debugger;
         if (!username || !pwhash){
-            console.log("Validation error, removing cookies.");
+            console.log("Missing username or pwhash. Logging out.");
             user = null;
             userhash = null;
-            $cookies.currentUser = "";
-            $cookies.currentUserHash = "";
+            delete $cookies['currentUser'];
+            delete $cookies['currentUserHash'];
+        } else {
+            console.log("Login verified OK!");
+            user = username;
+            userhash = pwhash;
+
+            $cookies.currentUser = username;
+            $cookies.currentUserHash = pwhash;
+
+            //TODO http://wemadeyoulook.at/en/blog/implementing-basic-http-authentication-http-requests-angular/
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookies.authdata;
         }
-        console.log("Login verified OK!");
-        user = username;
-        userhash = pwhash;
-
-        $cookies.currentUser = username;
-        $cookies.currentUserHash = pwhash;
-
-        //TODO http://wemadeyoulook.at/en/blog/implementing-basic-http-authentication-http-requests-angular/
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookies.authdata;
     };
 
     /*
      * Validate existing browser login cookie with API
      */
-    this.checkCookie = function(username, pwhash){
+    this.checkCookie = function(){
+        var cookie_user = $cookies.currentUser;
+        var pwhash = $cookies.currentUserHash;
 
+        // Check that cookies exist
+        if(!cookie_user || !pwhash) {
+            console.log("No login cookies found.");
+            return false;
+        }
+
+        // Validate with API
         $http({method: 'POST', url: '/api/verifycookie/',
-               data: {'username': username, 'pwhash': pwhash}}).
+               data: {'username': cookie_user, 'pwhash': pwhash}}).
             success(function(data, status, headers, config) {
                 //set user
-                user = username;
+                user = cookie_user;
                 userhash = pwhash;
                 console.log("Login verified OK!");
+                setUser(cookie_user, pwhash);
+                return true;
             }).
             error(function(data, status, headers, config) {
-                console.log("Validation error, removing cookies.");
-                $cookies.currentUser = "";
-                $cookies.currentUserHash = "";
+                console.log("Cookie validation error, removing cookies.");
+                setUser();
+                return false;
             });
+        return true;
     };
 
     /*
@@ -84,7 +96,7 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
         $http({method: 'GET', url: '/api/user/'}).
             success(function(data, status, headers, config) {
                 console.log("Login OK!");
-                setUser(username, data['pw_hash']);
+                setUser(data['_id'], data['pw_hash']);
                 $location.path('/home');
             }).
             error(function(data, status, headers, config) {

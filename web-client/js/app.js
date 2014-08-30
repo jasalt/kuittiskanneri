@@ -3,19 +3,7 @@ var login = angular.module('myLoginCheck', []).
             // Runs when entering the application
             // Check user login status
             return function(){
-                // Check cookies
-                var user = $cookies.currentUser;
-                var pwhash = $cookies.currentUserHash;
-
-                if(!user) {
-                    console.log("No login cookie found.");
-                    return false;
-                }
-
-                // Validate cookie with server
-
-                userService.checkCookie(user, pwhash);
-                return true;
+                userService.checkCookie();
             };
         });
 
