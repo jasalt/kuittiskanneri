@@ -16,7 +16,7 @@
 </div>
 <p><strong>Products</strong></p>
 <div class="row receipt-product-row" ng-repeat="product in receipt['products']">
-  
+
   <div class="col-xs-9">
     <input class="form-control" type="text" placeholder="Product title" value="{{product.name}}" >
   </div>
@@ -27,7 +27,7 @@
 <div class="row well">
   <div class="col-xs-6">
     <label class="control-label" for="inputPayment">Payment type</label>
-    <br /> 
+    <br />
     <div class="btn-group-vertical" id="inputPayment">
       <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
       <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
@@ -46,10 +46,10 @@
 </div>
 <div class="row">
   <div class="col-xs-6">
-    <button class="btn btn-success btn-block btn-lg">Save receipt</button>
+    <button class="btn btn-success btn-block btn-lg" ng-click="saveReceipt()">Save receipt</button>
   </div>
   <div class="col-xs-6">
-    <button class="btn btn-danger btn-block btn-lg">Cancel</button>
+    <button class="btn btn-danger btn-block btn-lg" ng-click="discardReceipt()">Cancel</button>
   </div>
 </div>
 

@@ -71,6 +71,12 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         $scope.changePaymentType = function() {
             $scope.receipt.credit_card = !$scope.receipt.credit_card;
         };
+
+        $scope.saveReceipt = function() {
+            receiptService.saveReceipt($scope.receipt);
+        };
+
+        $scope.discardReceipt = receiptService.discardReceipt;
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
     }])
@@ -115,7 +121,7 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             $scope.user = userService.getUsername();
             //console.log("route change");
             if ($scope.user) {
-              //  console.log("User is loggedin!");
+                //  console.log("User is loggedin!");
                 console.log($scope.user);
             } else {
                 //console.log("Not logged in.");
