@@ -23,18 +23,44 @@ app.service('receiptService', function() {
         this.receipt = rcpt;
     };
 });
-//TODO inject http service properly here or on the top line??
-app.service('userService', function($http, $location, $timeout, $cookies) {
 
+app.service('userService', function($http, $location, $timeout, $cookies) {
     var user = null;
     var userhash = null;
 
-    this.getUser = function() {
+    this.getUsername = function() {
         return user;
     };
 
-    this.setUser = function(username, pwhash){
-        // validate login cookie with api
+    /*
+     * Set user password and hash to service variable, cookie and
+     * http request content for basic auth
+     */
+    var setUser = function(username, pwhash){
+        debugger;
+        if (!username || !pwhash){
+            console.log("Validation error, removing cookies.");
+            user = null;
+            userhash = null;
+            $cookies.currentUser = "";
+            $cookies.currentUserHash = "";
+        }
+        console.log("Login verified OK!");
+        user = username;
+        userhash = pwhash;
+
+        $cookies.currentUser = username;
+        $cookies.currentUserHash = pwhash;
+
+        //TODO http://wemadeyoulook.at/en/blog/implementing-basic-http-authentication-http-requests-angular/
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $cookies.authdata;
+    };
+
+    /*
+     * Validate existing browser login cookie with API
+     */
+    this.checkCookie = function(username, pwhash){
+
         $http({method: 'POST', url: '/api/verifycookie/',
                data: {'username': username, 'pwhash': pwhash}}).
             success(function(data, status, headers, config) {
@@ -48,27 +74,22 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
                 $cookies.currentUser = "";
                 $cookies.currentUserHash = "";
             });
-
     };
 
+    /*
+     * Login user to API with credentials.
+     * Open browser basic auth login dialog.
+     */
     this.loginUser = function(username, password) {
-        
         $http({method: 'GET', url: '/api/user/'}).
             success(function(data, status, headers, config) {
                 console.log("Login OK!");
-                // this callback will be called asynchronously
-                // when the response is available
-                console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
+                setUser(username, data['pw_hash']);
+                $location.path('/home');
             }).
             error(function(data, status, headers, config) {
                 console.log("Login Error:");
                 console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
             });
         // HTTP Post /api/user/
         // {'username': username, 'password': password}
@@ -81,12 +102,7 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
                    'username': username,
                    'password': password}}).
             success(function(data, status, headers, config) {
-                user = data['username'];
-                userhash = data['pwhash'];
-                
-                $cookies.currentUser = data['username'];
-                $cookies.currentUserHash = data['pwhash'];
-                
+                setUser(data['username'], data['pwhash']);
                 $location.path('/home');
             }).
             error(function(data, status, headers, config) {
@@ -99,27 +115,22 @@ app.service('userService', function($http, $location, $timeout, $cookies) {
     };
 
     this.logout = function() {
-        $cookies.currentUser = '';
-        $cookies.currentUserHash = '';
-        user = null;
-        userhash = null;
-        
+        setUser();
         $location.path('/index');
-
     };
 
-    this.updatePassword = function(newPassword) {
-        $http({method: 'UPDATE', url: '/api/user/'}).
-            success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
-        // HTTP Post /api/user/
-        // {'username': username, 'password': password}
-        // TODO create http-request function.
-    };
+    // this.updatePassword = function(newPassword) {
+    //     $http({method: 'UPDATE', url: '/api/user/'}).
+    //         success(function(data, status, headers, config) {
+    //             // this callback will be called asynchronously
+    //             // when the response is available
+    //         }).
+    //         error(function(data, status, headers, config) {
+    //             // called asynchronously if an error occurs
+    //             // or server returns response with an error status.
+    //         });
+    //     // HTTP Post /api/user/
+    //     // {'username': username, 'password': password}
+    //     // TODO create http-request function.
+    // };
 });

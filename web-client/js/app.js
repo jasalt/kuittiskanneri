@@ -14,7 +14,7 @@ var login = angular.module('myLoginCheck', []).
 
                 // Validate cookie with server
 
-                userService.setUser(user, pwhash);
+                userService.checkCookie(user, pwhash);
                 return true;
             };
         });
@@ -40,7 +40,6 @@ angular.module('myApp', [
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .run(function($logincheck, $location) {
-
         if( $logincheck())
         {
             console.log("User logged in, redirecting to home");
