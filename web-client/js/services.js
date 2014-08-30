@@ -48,6 +48,8 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
             document.execCommand("ClearAuthenticationCache");
             delete $http.defaults.headers.common['Authorization'];
 
+            //TODO: browser still stores password somehow after logout?
+
         } else {
             console.log("Login verified OK!");
             user = username;
@@ -117,7 +119,7 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
                    'username': username,
                    'password': password}}).
             success(function(data, status, headers, config) {
-                setUser(data['username'], data['pwhash']);
+                setUser(data['username'], data['pw_hash']);
                 $location.path('/home');
             }).
             error(function(data, status, headers, config) {
