@@ -3,12 +3,8 @@
 
 <div class="receipt-history-list">
   <h2>TODO Recent history</h2>
-  <ul>
-    <li>Receipt 0</li>
-    <li>Receipt 1</li>
-    <li>Receipt 2</li>
-    <li>Receipt 3</li>
-    <li>Receipt 4</li>
-    <li>Receipt 5</li>
+  <ul ng-repeat="receipt in receipts">
+    <li>{{receipt.date}} - {{receipt.shop_name}} - {{receipt.total_sum}}</li>
   </ul>
 </div>
+{{receipts}}

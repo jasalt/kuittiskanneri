@@ -2,9 +2,12 @@
 
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
-    .controller('HomeCtrl', ['$scope', function($scope) {
-    }])
+    .controller('HomeCtrl', function($scope, receiptService) {
+        $scope.receipts = receiptService.getUserReceipts();
+        console.log($scope.receipts);
+    })
     .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService', function($scope, $upload, $location, receiptService) {
+        receiptService.setReceipt(null);
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
             $scope.loading = true;

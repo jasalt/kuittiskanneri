@@ -11,6 +11,8 @@ app.service('receiptService', function($http, $location) {
 
     var receipt = null;
 
+    var userReceipts = null;
+
     // this.receipt = this.mockReceipt;
     this.getReceipt = function() {
         // get current receipt or one specified by id
@@ -26,10 +28,20 @@ app.service('receiptService', function($http, $location) {
         //    $location.path('/receipt');
     };
 
+    this.setUserReceipts = function(receipts) {
+        userReceipts = receipts;
+        //    $location.path('/receipt');
+    };
+
+    this.getUserReceipts = function() {
+        return userReceipts;
+        //    $location.path('/receipt');
+    };
+
 
     this.discardReceipt = function(rcpt) {
         receipt = null;
-        //    $location.path('/receipt');
+        $location.path('/home');
     };
 
     /*
@@ -41,7 +53,7 @@ app.service('receiptService', function($http, $location) {
                data: modifiedReceipt}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");
-                //$location.path('/home');
+                $location.path('/home');
             }).
             error(function(data, status, headers, config) {
                 console.log("Something wrong with saving receipt.. duplicate maybe?");
@@ -50,7 +62,7 @@ app.service('receiptService', function($http, $location) {
     };
 });
 
-app.service('userService', function($http, $location, $timeout, $cookies, Base64) {
+app.service('userService', function($http, $location, $timeout, $cookies, Base64, receiptService) {
     var user = null;
     //var userhash = null;
     if ($cookies.authdata){
@@ -112,6 +124,7 @@ app.service('userService', function($http, $location, $timeout, $cookies, Base64
             success(function(data, status, headers, config) {
                 console.log("Login OK!");
                 setUser(data['_id'], data['pw_hash']);
+                receiptService.setUserReceipts(data['receipts']);
                 $location.path('/home');
             }).
             error(function(data, status, headers, config) {
