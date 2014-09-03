@@ -6,8 +6,10 @@ import receiptparser
 UPLOAD_FOLDER = 'uploads/'
 OCR_SCRIPT = './ocr.sh'
 
+
 def optical_character_recognition(imagepath):
-    """ Does OCR on an image and returns tuple: (raw text, autocorrected text, parsed receipt data)
+    """ Does OCR on an image and returns tuple:
+    (raw text, autocorrected text, parsed receipt data)
 
     imagepath: path to image to be processed
     """
@@ -15,9 +17,9 @@ def optical_character_recognition(imagepath):
     processed_imagepath = os.path.join(UPLOAD_FOLDER, 'temp.png')
 
     print "Make image more readable"
-    im_proc = subprocess.Popen(['convert',imagepath,'-resize','600x800',
-                                '-blur','2','-lat','8x8-2%',processed_imagepath],
-                                stdout=subprocess.PIPE)
+    im_proc = subprocess.Popen(['convert', imagepath, '-resize', '600x800',
+                                '-blur', '2', '-lat', '8x8-2%',
+                                processed_imagepath], stdout=subprocess.PIPE)
     im_proc.communicate()
 
     # Read receipt with Tesseract
@@ -32,13 +34,11 @@ def optical_character_recognition(imagepath):
     image_text = image_text.decode('utf-8')
 
     # Autocorrect
-
-
     print "Autocorrecting text"
     corrected_text = autocorrect.correct_text_block(image_text)
 
     if corrected_text is unicode:
-         corrected_text = corrected_text.encode('utf-8')
+        corrected_text = corrected_text.encode('utf-8')
 
     print "Parsing text"
     parsed_text = receiptparser.parse_receipt(corrected_text)
