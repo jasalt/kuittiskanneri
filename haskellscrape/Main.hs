@@ -2,20 +2,16 @@
 module Main where
 
 import Data.List
-import Data.Text.Encoding
-import qualified Data.Text as T
-import qualified Data.ByteString as BS
+import qualified Data.ByteString.Char8 as BS
+import qualified Data.ByteString.UTF8 as UTF
 import Network.HTTP
 import Control.Monad
 import Text.HTML.TagSoup
 
-data Hole = Hole
-hole :: Hole
-hole = undefined
 
 -- | Avaa urlin ja kaivaa vastauksesta sisällön.
 openUrl :: String -> IO String
-openUrl url = simpleHTTP (getRequest url) >>= getResponseBody
+openUrl url = liftM (UTF.toString . BS.pack) $ simpleHTTP (getRequest url) >>= getResponseBody
 
 
 -- | Kerää nettisivulta kaikki linkit, joiden href alkaa
@@ -50,8 +46,8 @@ scrapeProductNames productPageUrl = do
 main :: IO ()
 main = do
     categoryUrls <- (fmap . map) (baseUrl ++) (scrapeCategoryLinkHrefs testUrl)
-    productNames <- fmap concat $ mapM scrapeProductNames categoryUrls
-    BS.writeFile "scrape.txt" . encodeUtf8 . T.pack $ intercalate "\n" productNames
+    productNames <- fmap concat $ mapM scrapeProductNames (take 3 categoryUrls)
+    BS.writeFile "scrape.txt" . UTF.fromString $ intercalate "\n" productNames
     where
         testUrl =  "http://www.rainbow.fi/rainbow-tuotteet/selaa-tuotteita/"
         baseUrl = "http://www.rainbow.fi/"
