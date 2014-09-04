@@ -13,18 +13,22 @@ import Text.HTML.TagSoup
 openUrl :: String -> IO String
 openUrl url = simpleHTTP (getRequest url) >>= getResponseBody
 
--- | Kerää nettisivulta kaikki linkit, joiden href alkaa merkkijonolla "tuotteet"
+-- | Kerää nettisivulta kaikki linkit, joiden href alkaa
+--   merkkijonolla "tuotteet"
 scrapeProductLinksHrefs :: String -> IO [String]
 scrapeProductLinksHrefs = liftM (map getHref . filter productLink) . fmap parseTags . openUrl
     where
         -- Ottaa tagista hrefin arvon talteen
         getHref :: Tag String -> String
-        getHref (TagOpen "a" attributes) = fromMaybe "" $ lookup "href" attributes
+        getHref (TagOpen "a" attr) = fromMaybe "" $ lookup "href" attr
 
         -- Palauttaa True, jos tagi on linkki, ja sen hrefin alussa on "tuotteet"
         productLink :: Tag String -> Bool
-        productLink (TagOpen "a" attributes) = any (\(_, value) -> "tuotteet" `isPrefixOf` value) attributes
+        productLink (TagOpen "a" attr) = any (\(_, v) -> "tuotteet" `isPrefixOf` v) attr
         productLink _                        = False
 
 main :: IO ()
-main = mapM_ putStrLn =<< scrapeProductLinksHrefs "http://www.rainbow.fi/rainbow-tuotteet/selaa-tuotteita/"
+main = mapM_ putStrLn =<< scrapeProductLinksHrefs testUrl
+    where
+        testUrl =  "http://www.rainbow.fi/rainbow-tuotteet/selaa-tuotteita/"
+
