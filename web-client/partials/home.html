@@ -4,7 +4,7 @@
 <div class="receipt-history-list">
   <h2>TODO Recent history</h2>
   <ul ng-repeat="receipt in receipts">
-    <li>{{receipt.date}} - {{receipt.shop_name}} - {{receipt.total_sum}}</li>
+    <li ng-click="selectReceipt(receipt);">{{receipt.date}} - {{receipt.shop_name}} - {{receipt.total_sum}}</li>
   </ul>
 </div>
 {{receipts}}

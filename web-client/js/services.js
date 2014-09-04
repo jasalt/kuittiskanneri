@@ -7,8 +7,6 @@ app.service('receiptService', function($http, $location) {
     /*
      * Provide receipt data between different controllers.
      */
-    this.mockReceipt = {"date":{"Y":2014,"h":23,"m":15,"M":7,"D":16},"total_sum":null,"shop_name":"abc heinola","products":[{"price":2.39,"name":"hedelmäpupmijggurtti"},{"price":0.34,"name":"hakarueji"},{"price":7.29,"name":"hyvä suomi arkijuusto"},{"price":2.45,"name":"maksalaatikko"},{"price":2.49,"name":"broileripyörykät"},{"price":0.21,"name":"muovikassi 40l valio"},{"price":5.35,"name":"vmssezsn"}],"credit_card":true};
-
     var receipt = null;
 
     var userReceipts = null;
@@ -17,6 +15,13 @@ app.service('receiptService', function($http, $location) {
     this.getReceipt = function() {
         // get current receipt or one specified by id
         return receipt;
+    };
+
+    this.getMockReceipt = function() {
+        var mockReceipt = {"date":{"Y":2011,"h":21,"M":5,"m":1,"D":20},"total_sum":null,"credit_card":false,"products":[{"price":4.4,"name":"sanimiiaaapanna 1kg","$$hashKey":"012"},{"price":1.511,"name":"valio rasvaton nam 1,51","$$hashKey":"013"},{"price":1.59,"name":"elonen misevas 540g 9101","$$hashKey":"014"},{"price":0.75,"name":"pirkka banaani","$$hashKey":"015"},{"price":0.79,"name":"es mrnikalahim 105/1409 velie","$$hashKey":"016"},{"price":1.111,"name":"piri/ka naksanakkara 3009","$$hashKey":"017"},{"price":10,"name":"vhieevsli","$$hashKey":"018"},{"price":4.4,"name":"sanimiiaaapanna 1kg","$$hashKey":"019"},{"price":1.511,"name":"valio rasvaton nam 1,51","$$hashKey":"01A"},{"price":1.59,"name":"elonen misevas 540g 9101","$$hashKey":"01B"},{"price":0.75,"name":"pirkka banaani","$$hashKey":"01C"},{"price":0.79,"name":"es mrnikalahim 105/1409 velie","$$hashKey":"01D"},{"price":1.111,"name":"piri/ka naksanakkara 3009","$$hashKey":"01E"},{"price":10,"name":"vhieevsli","$$hashKey":"01F"}],"shop_name":"1101101100001 1011311101"};
+
+        // get current receipt or one specified by id
+        return mockReceipt;
     };
 
     this.updateReceipt = function(rcpt) {
@@ -49,7 +54,12 @@ app.service('receiptService', function($http, $location) {
      */
 
     this.saveReceipt = function(modifiedReceipt) {
-        $http({method: 'POST', url: '/api/receipt/',
+        // TODO if has id, then UPDAET
+        var methodForRequest = "POST";
+        if ("_id" in modifiedReceipt) {
+            methodForRequest = "UPDATE";
+        }
+        $http({method: methodForRequest, url: '/api/receipt/',
                data: modifiedReceipt}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");

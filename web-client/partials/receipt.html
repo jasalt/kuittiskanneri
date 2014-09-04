@@ -1,56 +1,109 @@
-<h3>Validate receipt</h3>
-<div class="receipt-details">
-  <div class="row well">
-    <div class="col-xs-6">
-      <label class="control-label" for="inputShop">Shop</label>
-      <input class="form-control" type="text" placeholder="Shop" value="{{receipt.shop_name}}" id="inputShop">
-</label>
-</div>
+<div ng-if="editingReceipt">
+  <h3>Edit receipt</h3>
+  <div class="receipt-details">
+    <div class="row well">
+      <div class="col-xs-6">
+        <label class="control-label" for="inputShop">Shop</label>
+        <input class="form-control" type="text" placeholder="Shop" ng-model="receipt.shop_name" id="inputShop">
+      </div>
 
-<div class="col-xs-6">
-  <label class="control-label" for="inputDate">Date</label>
-
-  <input class="form-control" type="text" placeholder="Date" value="{{receipt.date}}" id="inputDate" >
-</div>
-</div>
-</div>
-<p><strong>Products</strong></p>
-<div class="row receipt-product-row" ng-repeat="product in receipt['products']">
-
-  <div class="col-xs-9">
-    <input class="form-control" type="text" placeholder="Product title" value="{{product.name}}" >
-  </div>
-  <div class="col-xs-3">
-    <input class="form-control" type="text" placeholder="Price" value="{{product.price}}" >
-  </div>
-</div>
-<div class="row well">
-  <div class="col-xs-6">
-    <label class="control-label" for="inputPayment">Payment type</label>
-    <br />
-    <div class="btn-group-vertical" id="inputPayment">
-      <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
-      <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
-    </div>
-  </div>
-  <div class="col-xs-6">
-    <div class="form-group">
-      <label class="control-label" for="inputSum">Total sum</label>
-      <div class="input-group" id="inputSum">
-        <div class="input-group-addon">€</div>
-        <input class="form-control input-lg" type="text" placeholder="Total" value="{{receipt['total_sum']}}">
+      <div class="col-xs-6">
+        <label class="control-label" for="inputDate">Date</label>
+        <input class="form-control" type="text" placeholder="Date" ng-model="receipt.date" id="inputDate" >
       </div>
     </div>
   </div>
-</div>
-</div>
-<div class="row">
-  <div class="col-xs-6">
-    <button class="btn btn-success btn-block btn-lg" ng-click="saveReceipt()">Save receipt</button>
+  <p><strong>Products</strong></p>
+  <div class="row receipt-product-row" ng-repeat="product in receipt['products']">
+    <div class="col-xs-9">
+      <input class="form-control" ng-model="product.name" type="text" placeholder="Product title">
+    </div>
+    <div class="col-xs-3">
+      <input class="form-control" ng-model="product.price" type="text" placeholder="Price">
+    </div>
   </div>
-  <div class="col-xs-6">
-    <button class="btn btn-danger btn-block btn-lg" ng-click="discardReceipt()">Cancel</button>
+  <div class="row well">
+    <div class="col-xs-6">
+      <label class="control-label" for="inputPayment">Payment type</label>
+      <br />
+      <div class="btn-group-vertical" id="inputPayment">
+        <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSum">Total sum</label>
+        <div class="input-group" id="inputSum">
+          <div class="input-group-addon">€</div>
+          <input class="form-control input-lg" type="text" placeholder="Enter total" ng-model="receipt['total_sum']">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <button class="btn btn-success btn-block btn-lg" ng-click="saveReceipt()">Save receipt</button>
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-danger btn-block btn-lg" ng-click="discardReceipt()">Cancel</button>
+    </div>
   </div>
 </div>
+
+<div ng-if="!editingReceipt">
+  <h3>Viewein receipt</h3>
+  <div class="receipt-details">
+    <div class="row well">
+      <div class="col-xs-6">
+        <label class="control-label" for="inputShop">Shop</label>
+        <input disabled class="form-control" type="text" placeholder="Shop" ng-model="receipt.shop_name" id="inputShop">
+      </div>
+
+      <div class="col-xs-6">
+        <label class="control-label" for="inputDate">Date</label>
+        <input disabled class="form-control" type="text" placeholder="Date" ng-model="receipt.date" id="inputDate" >
+      </div>
+    </div>
+  </div>
+  <p><strong>Products</strong></p>
+  <div class="row receipt-product-row" ng-repeat="product in receipt['products']">
+    <div class="col-xs-9">
+      <input disabled class="form-control" ng-model="product.name" type="text" placeholder="Product title">
+    </div>
+    <div class="col-xs-3">
+      <input disabled class="form-control" ng-model="product.price" type="text" placeholder="Price">
+    </div>
+  </div>
+  <div class="row well">
+    <div class="col-xs-6">
+      <label class="control-label" for="inputPayment">Payment type</label>
+      <br />
+      <div class="btn-group-vertical" id="inputPayment">
+        <button disabled type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
+        <button disabled type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSum">Total sum</label>
+        <div class="input-group" id="inputSum">
+          <div class="input-group-addon">€</div>
+          <input disabled class="form-control input-lg" type="text" placeholder="Enter total" ng-model="receipt['total_sum']">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <button class="btn btn-success btn-block btn-lg" ng-click="editReceipt()">Edit receipt</button>
+    </div>
+    <div class="col-xs-6">
+      <a href="#/home" class="btn btn-danger btn-block btn-lg">Go back</a>
+    </div>
+  </div>
+</div>
+
+
 
 <div>{{receipt}}</div>
