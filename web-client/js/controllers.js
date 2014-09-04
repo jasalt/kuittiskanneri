@@ -2,9 +2,12 @@
 
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
-    .controller('HomeCtrl', ['$scope', function($scope) {
-    }])
+    .controller('HomeCtrl', function($scope, receiptService) {
+        $scope.receipts = receiptService.getUserReceipts();
+        console.log($scope.receipts);
+    })
     .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService', function($scope, $upload, $location, receiptService) {
+        receiptService.setReceipt(null);
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
             $scope.loading = true;
@@ -50,20 +53,20 @@ angular.module('myApp.controllers', ['angularFileUpload'])
          * Change drop-box area css class when dragging file
          */
         $scope.dragOverClass = function($event) {
-	    var items = $event.dataTransfer.items;
-	    var hasFile = false;
-	    if (items != null) {
-		for (var i = 0 ; i < items.length; i++) {
-		    if (items[i].kind == 'file') {
-			hasFile = true;
-			break;
-		    }
-		}
-	    } else {
-		hasFile = true;
-	    }
-	    return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
-	};
+            var items = $event.dataTransfer.items;
+            var hasFile = false;
+            if (items != null) {
+                for (var i = 0 ; i < items.length; i++) {
+                    if (items[i].kind == 'file') {
+                        hasFile = true;
+                        break;
+                    }
+                }
+            } else {
+                hasFile = true;
+            }
+            return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
+        };
     }])
     .controller('ReceiptCtrl', ['$scope', 'receiptService', function($scope, receiptService) {
         $scope.receipt = receiptService.getReceipt();
@@ -71,24 +74,68 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         $scope.changePaymentType = function() {
             $scope.receipt.credit_card = !$scope.receipt.credit_card;
         };
+
+        $scope.saveReceipt = function() {
+            receiptService.saveReceipt($scope.receipt);
+        };
+
+        $scope.discardReceipt = receiptService.discardReceipt;
     }])
     .controller('AboutCtrl', ['$scope', function($scope) {
     }])
-    .controller('NavbarCtrl', ['$scope', '$location', function($scope, $location) {
+    .controller('IndexCtrl', function($scope, $timeout, $location, userService) {
+        console.log("index");
+        $scope.login = userService.loginUser;
+    })
+    .controller('RegisterCtrl', function($scope, $timeout, $location, userService) {
+        // Register dialog
+
+        // if (userService.getUsername()){
+        //     console.log("already logged in!@#");
+        // }
+
+        // TODO redirect if user already logged in
+        $scope.registerOk = null; // If user registration is OK show ui feedback
+        //$scope.username = null;
+        //$scope.password = null;
+        //var user = userService.getUser();
+        $scope.submitRegisterForm = function() {
+            console.log("Registering user " + $scope.username);
+            userService.registerUser($scope.username, $scope.password);
+
+            //userService.setUser($scope.user.name, $scope.user.pwhash);
+        };
+
+        // $timeout(function() {
+        //     $location.path('/home');
+        // }, 2000);
+    })
+    .controller('NavbarCtrl', function($scope, $location, userService) {
         $scope.isActive = function(viewLocation) {
             return viewLocation === $location.path();
         };
-    }]);
+
+        $scope.login = userService.loginUser;
+
+        // TODO get information about change from message as this value is not updated
+        // listen for changes in location or messages and re-query
+
+        $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
+            $scope.user = userService.getUsername();
+            //console.log("route change");
+            if ($scope.user) {
+                //  console.log("User is loggedin!");
+                console.log($scope.user);
+            } else {
+                //console.log("Not logged in.");
+            }
+        });
 
 
+        $scope.logout = function() {
+            alert("logging out");
+            userService.logout();
+        };
 
 
-
-
-
-
-
-
-
-
-
+    });
