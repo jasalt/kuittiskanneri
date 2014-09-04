@@ -11,14 +11,17 @@ import Text.HTML.TagSoup
 
 -- | Avaa urlin ja kaivaa vastauksesta sisällön.
 openUrl :: String -> IO String
-openUrl url = liftM (UTF.toString . BS.pack) $ simpleHTTP (getRequest url) >>= getResponseBody
-
+openUrl url = liftM (UTF.toString . BS.pack) $ request url >>= getResponseBody
+    where
+        request = simpleHTTP . getRequest
 
 -- | Kerää nettisivulta kaikki linkit, joiden href alkaa
 --   merkkijonolla "tuotteet".
 scrapeCategoryLinkHrefs :: String -- ^ Kategoriasivun URL
                         -> IO [String]
-scrapeCategoryLinkHrefs = liftM (map getHref . filter productLink) . fmap parseTags . openUrl
+scrapeCategoryLinkHrefs url = do
+    tags <- fmap parseTags $ openUrl url
+    return . map getHref $ filter link tags
     where
         -- Ottaa tagista hrefin arvon talteen
         getHref :: Tag String -> String
@@ -26,10 +29,10 @@ scrapeCategoryLinkHrefs = liftM (map getHref . filter productLink) . fmap parseT
             | isTagOpen tag = fromAttrib "href" tag
             | otherwise     = ""
 
-        -- Palauttaa True, jos tagi on linkki, ja sen hrefin alussa on "tuotteet"
-        productLink :: Tag String -> Bool
-        productLink (TagOpen "a" attr) = any (\(_, v) -> "tuotteet" `isPrefixOf` v) attr
-        productLink _                  = False
+        -- Palauttaa True, jos tagi on linkki ja sen hrefin alussa on "tuotteet"
+        link :: Tag String -> Bool
+        link (TagOpen "a" attr) = any ("tuotteet" `isPrefixOf`) $ map snd attr
+        link _                  = False
 
 
 -- | Kerää tuotesivulta tuotteiden nimet.
@@ -42,11 +45,11 @@ scrapeProductNames productPageUrl = do
     return $ map (fromTagText . flip (!!) 3) productTags
 
 
--- | Kerää tuotteet scrape.txt tiedostoon.
+-- | Kerää tuotenimet scrape.txt tiedostoon.
 main :: IO ()
 main = do
     categoryUrls <- (fmap . map) (baseUrl ++) (scrapeCategoryLinkHrefs testUrl)
-    productNames <- fmap concat $ mapM scrapeProductNames (take 3 categoryUrls)
+    productNames <- fmap concat $ mapM scrapeProductNames categoryUrls
     BS.writeFile "scrape.txt" . UTF.fromString $ intercalate "\n" productNames
     where
         testUrl =  "http://www.rainbow.fi/rainbow-tuotteet/selaa-tuotteita/"
