@@ -28,7 +28,10 @@ scrapeProductLinksHrefs = liftM (map getHref . filter productLink) . fmap parseT
         productLink _                        = False
 
 main :: IO ()
-main = mapM_ putStrLn =<< scrapeProductLinksHrefs testUrl
+main = do
+  categoryUrls <- scrapeProductLinksHrefs testUrl
+  return ()
     where
         testUrl =  "http://www.rainbow.fi/rainbow-tuotteet/selaa-tuotteita/"
+        testUrl2 = "http://www.rainbow.fi/tuotteet/elintarvikkeet/hedelmat-ja-marjat-tuore/"
 
