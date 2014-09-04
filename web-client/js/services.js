@@ -54,7 +54,12 @@ app.service('receiptService', function($http, $location) {
      */
 
     this.saveReceipt = function(modifiedReceipt) {
-        $http({method: 'POST', url: '/api/receipt/',
+        // TODO if has id, then UPDAET
+        var methodForRequest = "POST";
+        if ("_id" in modifiedReceipt) {
+            methodForRequest = "UPDATE";
+        }
+        $http({method: methodForRequest, url: '/api/receipt/',
                data: modifiedReceipt}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");

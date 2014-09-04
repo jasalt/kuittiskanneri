@@ -2,11 +2,19 @@
 
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
-    .controller('HomeCtrl', function($scope, receiptService) {
+    .controller('HomeCtrl', function($scope, receiptService, $location) {
         $scope.receipts = receiptService.getUserReceipts();
-        console.log($scope.receipts);
+
+        /*
+         * When selecting a receipt from history, set it as current and redirect to receipt view
+         */
+        $scope.selectReceipt = function(receipt) {
+            receiptService.setReceipt(receipt);
+            $location.path('/receipt');
+        };
     })
-    .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService', function($scope, $upload, $location, receiptService) {
+    .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService',
+                               function($scope, $upload, $location, receiptService) {
         receiptService.setReceipt(null);
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
@@ -69,7 +77,19 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         };
     }])
     .controller('ReceiptCtrl', ['$scope', 'receiptService', function($scope, receiptService) {
-        $scope.receipt = receiptService.getReceipt();
+        // TODO DEV MOCk get the real receipt
+        $scope.origReceipt = receiptService.getReceipt();
+        //$scope.origReceipt["_id"] = 123;
+        if ("_id" in $scope.origReceipt){
+            // The receipt is new so start editing.
+            console.log("receipt has id");
+            console.log($scope.origReceipt['_id']);
+            $scope.editingReceipt = false;
+        } else {
+            console.log("receipt has not id ");
+            $scope.editingReceipt = true;
+        }
+        $scope.receipt = $scope.origReceipt;
 
         $scope.changePaymentType = function() {
             $scope.receipt.credit_card = !$scope.receipt.credit_card;
@@ -77,6 +97,10 @@ angular.module('myApp.controllers', ['angularFileUpload'])
 
         $scope.saveReceipt = function() {
             receiptService.saveReceipt($scope.receipt);
+        };
+
+        $scope.editReceipt = function() {
+            $scope.editingReceipt = !$scope.editingReceipt;
         };
 
         $scope.discardReceipt = receiptService.discardReceipt;
