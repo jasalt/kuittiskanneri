@@ -108,7 +108,7 @@ def create_user():
     # Redirect to get_user
     return jsonify({'username': username,
                     'pw_hash': pw_hash}), 201, {
-                        'Location': url_for('get_user',
+                        'Location': url_for('authentication.get_user',
                                             id=username,
                                             _external=True)}
 
