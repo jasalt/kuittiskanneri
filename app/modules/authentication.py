@@ -1,7 +1,7 @@
 from flask import Blueprint, g, Response, request, url_for, abort
 from passlib.apps import custom_app_context as pwd_context
 from functools import wraps
-from tools import jsonify  # jsonify with Mongo BSON support
+from utils import jsonify  # jsonify with Mongo BSON support
 import arrow
 
 from app import mongo
