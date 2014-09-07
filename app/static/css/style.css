@@ -1,0 +1,72 @@
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+.ng-file-over {
+    border: dotted 3px red;
+}
+/* Default class applied to drop zones on over */
+
+.another-file-over-class {
+    border: dotted 3px green;
+}
+html,
+body {
+    height: 100%;
+}
+canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: 100px;
+    margin: 6px 0 0 6px;
+}
+/* Add some space to product list */
+
+.receipt-product-row {
+    margin-bottom: 20px;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.upload-drop-box {
+    margin-top: 15px;
+    margin-left: 20px;
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 35px;
+    color: gray;
+}
+.upload-drop-box-dragover {
+    border: 5px dashed blue;
+}
+.upload-drop-box-dragover-err {
+    background-color: red;
+}
+.loading {
+    /* padding: 20px; */
+    margin-top: 15px;
+    /* width: 80px; */
+}
+
+.receipt-sum {
+    padding: 5px;
+    margin: 5px;
+}
