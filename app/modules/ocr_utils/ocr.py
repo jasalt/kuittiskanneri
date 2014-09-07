@@ -3,8 +3,11 @@ import subprocess
 import autocorrect
 import receiptparser
 
-UPLOAD_FOLDER = 'uploads/'
-OCR_SCRIPT = './ocr.sh'
+# TODO HACK DEPLOY This breaks easily
+
+from app import app
+UPLOAD_FOLDER = app.root_path + '/' + app.config['UPLOAD_FOLDER']
+OCR_SCRIPT = app.root_path + '/modules/ocr_utils/ocr.sh'
 
 
 def optical_character_recognition(imagepath):

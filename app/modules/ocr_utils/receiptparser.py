@@ -173,7 +173,7 @@ class ParserTest(unittest.TestCase):
         test('', None)
         test(' ', None)
         test('abc', None)
-        
+
 
     def test_product_line(self):
         """ Tests parse_product_line """
@@ -220,4 +220,3 @@ class ParserTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
