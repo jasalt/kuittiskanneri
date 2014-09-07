@@ -4,6 +4,6 @@ web-client/bower_components/
 *.swp
 tess_out.txt
 venv/
-web-server/uploads/
-web-server/api/uploads/
+app/uploads/
+uploads/
 .DS_Store
