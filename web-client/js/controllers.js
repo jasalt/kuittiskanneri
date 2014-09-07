@@ -12,6 +12,11 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             receiptService.setReceipt(receipt);
             $location.path('/receipt');
         };
+
+        
+        $scope.deleteReceipt = function(receiptid) {
+            receiptService.deleteReceipt(receiptid);
+        };
     })
     .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService',
                                function($scope, $upload, $location, receiptService) {

@@ -26,6 +26,7 @@ app.service('receiptService', function($http, $location) {
 
     this.updateReceipt = function(rcpt) {
         // Update receipt to api
+        
     };
 
     this.setReceipt = function(rcpt) {
@@ -49,12 +50,26 @@ app.service('receiptService', function($http, $location) {
         $location.path('/home');
     };
 
+    this.deleteReceipt = function(receiptid) {
+        $http({method: 'DELETE', url: '/api/receipt/',
+               data: receiptid}).
+            success(function(data, status, headers, config) {
+                console.log("Receipt saved");
+                $location.path('/home');
+            }).
+            error(function(data, status, headers, config) {
+                console.log("Something wrong with saving receipt.. duplicate maybe?");
+                console.log(data);
+            });
+        $location.path('/home');
+    };
+
     /*
      * Save modified receipt after upload
      */
 
     this.saveReceipt = function(modifiedReceipt) {
-        // TODO if has id, then UPDAET
+        // TODO if has id, then UPDATE
         var methodForRequest = "POST";
         if ("_id" in modifiedReceipt) {
             methodForRequest = "UPDATE";
