@@ -51,7 +51,7 @@ app.service('receiptService', function($http, $location) {
     };
 
     this.deleteReceipt = function(receiptid) {
-        $http({method: 'DELETE', url: '/api/receipt/',
+        $http({method: 'DELETE', url: '/api/receipts/',
                data: receiptid}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");
@@ -74,7 +74,7 @@ app.service('receiptService', function($http, $location) {
         if ("_id" in modifiedReceipt) {
             methodForRequest = "UPDATE";
         }
-        $http({method: methodForRequest, url: '/api/receipt/',
+        $http({method: methodForRequest, url: '/api/receipts/',
                data: modifiedReceipt}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");
