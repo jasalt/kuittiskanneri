@@ -9,7 +9,7 @@ from app import mongo
 '''
 Authentication utilities and endpoints.
 '''
-authentication = Blueprint('authentication', __name__)
+mod = Blueprint('authentication', __name__)
 
 
 # Authentication functions
@@ -57,23 +57,22 @@ def requires_auth(f):
     return decorated
 
 
-@authentication.route('/api/user/', methods=['GET'])
+@mod.route('/api/user/', methods=['GET'])
 @requires_auth
 def get_user():
     ''' Normal user login by password. '''
     # TODO get user scan history
-    receipts = mongo.db.receipts
-    user_receipts = []
-    db_receipts = receipts.find({"user":
-                                 request.authorization['username']})
-    for receipt in db_receipts:
-        user_receipts.append(receipt)
+    # receipts = mongo.db.receipts
+    # user_receipts = []
 
-    g.user['receipts'] = user_receipts
+    # for receipt in receipts:
+    #     user_receipts.append(receipt)
+    # g.user['receipts'] = user_receipts
+    # TODO call get receipts
     return jsonify(g.user)
 
 
-@authentication.route('/api/user/', methods=['POST'])
+@mod.route('/api/user/', methods=['POST'])
 def create_user():
     ''' Create new user '''
     # Get password from request payload
@@ -113,7 +112,7 @@ def create_user():
                                             _external=True)}
 
 
-@authentication.route('/api/user/<id>', methods=['POST'])
+@mod.route('/api/user/<id>', methods=['POST'])
 def update_user(id):
     ''' Update user data'''
     # TODO get authenticated user id from request

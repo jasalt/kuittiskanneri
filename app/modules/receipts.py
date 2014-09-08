@@ -6,13 +6,18 @@ from app import mongo
 from authentication import requires_auth
 from utils import jsonify
 
-receipts = Blueprint('receipts', __name__)
+'''
+Operations on receipts.
+'''
+
+mod = Blueprint('receipts', __name__)
+
+receipts = mongo.db.receipts
 
 
-@receipts.route('/api/receipts/', methods=['GET', 'POST', 'UPDATE', 'DELETE'])
+@mod.route('/api/receipts/', methods=['GET', 'POST', 'UPDATE', 'DELETE'])
 @requires_auth
 def receipt():
-    receipts = mongo.db.receipts
     if request.method == 'GET':
         '''Get receipt specified by ID'''  # TODO
         return {'id': id, 'data': 'GET mocked'}
@@ -39,8 +44,10 @@ def receipt():
         return jsonify({"query": query})
 
 
-@receipts.route('/api/receipts/<query>', methods=['GET'])
-def get_receipts(query):
+@mod.route('/api/receipts', methods=['GET'])
+def get_receipts():
     ''' Querying multiple receipts '''
-    return {'query': query, 'data': 'GET query ' +
-            query + ' mocked'}
+    query = request.args.get('q')
+    found_receipts = receipts.find(query)
+    # TODO better response
+    return {'query': query, 'data': found_receipts}

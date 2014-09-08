@@ -7,7 +7,7 @@ from utils import jsonify
 Handle uploads and do OCR on image files.
 '''
 
-uploads = Blueprint('uploads', __name__)
+mod = Blueprint('uploads', __name__)
 
 from app import app
 from authentication import requires_auth
@@ -19,7 +19,7 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1] in app.config['ALLOWED_FILES']
 
 
-@uploads.route('/api/simple/upload', methods=['POST'])
+@mod.route('/api/simple/upload', methods=['POST'])
 def simple_upload_receipt():
     ''' Receipt upload handler without DB connection and authentication.'''
     image_file = request.files['file']
@@ -39,7 +39,7 @@ def simple_upload_receipt():
         return jsonify(uploads_readings)
 
 
-@uploads.route('/api/upload', methods=['POST'])
+@mod.route('/api/upload', methods=['POST'])
 @requires_auth
 def upload_receipt():
     ''' Receipt upload handler
