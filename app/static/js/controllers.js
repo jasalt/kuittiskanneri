@@ -17,7 +17,11 @@ angular.module('myApp.controllers', ['angularFileUpload'])
         };
 
         $scope.deleteReceipt = function(receiptid) {
-            receiptService.deleteReceipt(receiptid);
+            receiptService.deleteReceipt(receiptid).success(function(result) {
+                // After successful delete, remove from scope also
+                $scope.receipts = _.without($scope.receipts, _.findWhere(
+                    $scope.receipts, {'_id': receiptid}));
+            });
         };
     })
     .controller('UploadCtrl', ['$scope', '$upload', '$location', 'receiptService',

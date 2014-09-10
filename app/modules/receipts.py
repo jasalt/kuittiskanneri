@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, request
+from flask import Blueprint, request, abort
 from flask.ext.pymongo import ObjectId
 
 from app import mongo
@@ -32,9 +32,12 @@ def receipt(id):
 
     if request.method == 'DELETE':
         '''Delete receipt'''
-        receiptid = request.data
-        query = receipts.remove({'_id': ObjectId(receiptid)})
-        return jsonify({"query": query})
+        # TODO: other users receipts can now be removed by ID
+        try:
+            query = receipts.remove({'_id': ObjectId(id)})
+        except:
+            abort(404)
+        return jsonify({"query": str(query)}), 200
 
 
 # Actions for collection
@@ -48,7 +51,8 @@ def get_receipts():
         receipt['user'] = request.authorization['username']
         db_operation = receipts.insert(receipt)
         return jsonify({'savedReceipt': receipt, 'dbOperation': db_operation})
-
+# 201 Created
+# 403 Forbidden
     if request.method == 'GET':
         ''' List all receipts for request user.
         Pagination is set by limit and offset variables.

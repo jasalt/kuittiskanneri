@@ -43,7 +43,6 @@ app.service('receiptService', function($http, $location) {
         var promise = $http({method: 'GET', url: '/api/receipts'}).
                 success(function(data, status, headers, config) {
                     console.log("User receipts loaded");
-                    return data.receipts;
                 }).
                 error(function(data, status, headers, config) {
                     console.log("Something wrong with getting user receipts..");
@@ -58,17 +57,9 @@ app.service('receiptService', function($http, $location) {
     };
 
     this.deleteReceipt = function(receiptid) {
-        $http({method: 'DELETE', url: '/api/receipts/',
-               data: receiptid}).
-            success(function(data, status, headers, config) {
-                console.log("Receipt saved");
-                $location.path('/home');
-            }).
-            error(function(data, status, headers, config) {
-                console.log("Something wrong with saving receipt.. duplicate maybe?");
-                console.log(data);
-            });
-        $location.path('/home');
+        var promise = $http({method: 'DELETE',
+                             url: '/api/receipts/' + receiptid});
+        return promise;
     };
 
     /*
