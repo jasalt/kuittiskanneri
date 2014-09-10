@@ -26,7 +26,7 @@ app.service('receiptService', function($http, $location) {
 
     this.updateReceipt = function(rcpt) {
         // Update receipt to api
-        
+
     };
 
     this.setReceipt = function(rcpt) {
@@ -40,8 +40,15 @@ app.service('receiptService', function($http, $location) {
     };
 
     this.getUserReceipts = function() {
-        return userReceipts;
-        //    $location.path('/receipt');
+        var promise = $http({method: 'GET', url: '/api/receipts'}).
+                success(function(data, status, headers, config) {
+                    console.log("User receipts loaded");
+                    return data.receipts;
+                }).
+                error(function(data, status, headers, config) {
+                    console.log("Something wrong with getting user receipts..");
+                });
+        return promise;
     };
 
 
@@ -74,7 +81,7 @@ app.service('receiptService', function($http, $location) {
         if ("_id" in modifiedReceipt) {
             methodForRequest = "UPDATE";
         }
-        $http({method: methodForRequest, url: '/api/receipts/',
+        $http({method: methodForRequest, url: '/api/receipts',
                data: modifiedReceipt}).
             success(function(data, status, headers, config) {
                 console.log("Receipt saved");

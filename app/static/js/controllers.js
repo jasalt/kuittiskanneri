@@ -2,8 +2,11 @@
 
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
-    .controller('HomeCtrl', function($scope, receiptService, $location) {
-        $scope.receipts = receiptService.getUserReceipts();
+    .controller('HomeCtrl', function($scope, receiptService, userService, $location) {
+        console.log("Getting receipts for " + userService.getUsername());
+        receiptService.getUserReceipts().then(function(result) {
+            $scope.receipts = result.data.receipts;
+        });
 
         /*
          * When selecting a receipt from history, set it as current and redirect to receipt view
@@ -13,7 +16,6 @@ angular.module('myApp.controllers', ['angularFileUpload'])
             $location.path('/receipt');
         };
 
-        
         $scope.deleteReceipt = function(receiptid) {
             receiptService.deleteReceipt(receiptid);
         };
