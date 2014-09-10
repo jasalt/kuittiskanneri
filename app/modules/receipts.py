@@ -23,7 +23,7 @@ def receipt(id):
         '''Get receipt specified by ID'''  # TODO
         return {'id': id, 'data': 'GET mocked'}
 
-    if request.method == 'UPDATE':
+    if request.method == 'UPDATE': # TODO A
         '''Update receipt data'''
         # TODO HACK why not json? There's something weird going on.
         receipt = json.loads(request.data)
@@ -34,7 +34,9 @@ def receipt(id):
         '''Delete receipt'''
         # TODO: other users receipts can now be removed by ID
         try:
-            query = receipts.remove({'_id': ObjectId(id)})
+            query = receipts.remove(ObjectId(id))
+            if query[u'n'] is 0:
+                abort(404, "Problem with Mongo remove function")
         except:
             abort(404)
         return jsonify({"query": str(query)}), 200
@@ -66,7 +68,6 @@ def get_receipts():
         user_receipts = []
         for receipt in user_receipts_cursor:
             user_receipts.append(receipt)
-
         return jsonify({'receipts':
                         user_receipts[offset:offset+limit],
                         'pagination': {

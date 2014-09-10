@@ -3,9 +3,17 @@
 /* Controllers */
 angular.module('myApp.controllers', ['angularFileUpload'])
     .controller('HomeCtrl', function($scope, receiptService, userService, $location) {
+        $scope.loading = true;
         console.log("Getting receipts for " + userService.getUsername());
         receiptService.getUserReceipts().then(function(result) {
-            $scope.receipts = result.data.receipts;
+            $scope.loading = false;
+            var receipts = result.data.receipts;
+            if (receipts.length == 0){
+                return;
+            }
+            else {
+                $scope.receipts = receipts;
+            }
         });
 
         /*
