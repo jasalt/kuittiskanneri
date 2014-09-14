@@ -24,11 +24,6 @@ app.service('receiptService', function($http, $location) {
         return mockReceipt;
     };
 
-    this.updateReceipt = function(rcpt) {
-        // Update receipt to api
-
-    };
-
     this.setReceipt = function(rcpt) {
         receipt = rcpt;
         //    $location.path('/receipt');
@@ -63,25 +58,24 @@ app.service('receiptService', function($http, $location) {
     };
 
     /*
-     * Save modified receipt after upload
+     * Posts a new receipt or updates an existing
      */
-
-    this.saveReceipt = function(modifiedReceipt) {
-        // TODO if has id, then UPDATE
+    this.saveReceipt = function(receipt) {
         var methodForRequest = "POST";
-        if ("_id" in modifiedReceipt) {
+        var url = '/api/receipts';
+
+        // TODO if has id, then UPDATE
+        if ("_id" in receipt) {
             methodForRequest = "UPDATE";
+            url = '/api/receipts/' + receipt['_id'];
         }
-        $http({method: methodForRequest, url: '/api/receipts',
-               data: modifiedReceipt}).
-            success(function(data, status, headers, config) {
-                console.log("Receipt saved");
-                $location.path('/home');
-            }).
-            error(function(data, status, headers, config) {
-                console.log("Something wrong with saving receipt.. duplicate maybe?");
-                console.log(data);
-            });
+
+        var promise = $http({method: methodForRequest, url: url,
+                             data: receipt})
+                .error(function(data, status, headers, config) {
+                    console.log("Something wrong with saving receipt.. duplicate maybe?");
+                });
+        return promise;
     };
 });
 

@@ -15,16 +15,21 @@ angular.module('myApp', [
     'myApp.filters',
     'myApp.services',
     'myApp.directives',
-    'myApp.controllers',
+
+    // Views / Features
+    'myApp.home',
+    'myApp.upload',
+    'myApp.register',
+    'myApp.navbar',
     'myLoginCheck'
 ]).
     config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'partials/index.html', controller: 'IndexCtrl'});
-        $routeProvider.when('/register', {templateUrl: 'partials/register.html', controller: 'RegisterCtrl'});
-        $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
-        $routeProvider.when('/upload', {templateUrl: 'partials/upload.html', controller: 'UploadCtrl'});
-        $routeProvider.when('/receipt', {templateUrl: 'partials/receipt.html', controller: 'ReceiptCtrl'});
-        $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
+        $routeProvider.when('/', {templateUrl: 'angular/root/root.html', controller: 'RootController'});
+        $routeProvider.when('/register', {templateUrl: 'angular/register/register.html', controller: 'RegisterController'});
+        $routeProvider.when('/home', {templateUrl: 'angular/home/home.html', controller: 'HomeController'});
+        $routeProvider.when('/upload', {templateUrl: 'angular/upload/upload.html', controller: 'UploadController'});
+        $routeProvider.when('/receipt', {templateUrl: 'angular/receipt/receipt.html', controller: 'ReceiptController'});
+        $routeProvider.when('/about', {templateUrl: 'angular/about/about.html'});
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .run(function($logincheck, $location, $cookies, userService) {
