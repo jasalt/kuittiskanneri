@@ -5,23 +5,36 @@ angular.module('myApp', [
     'myApp.filters',
     'myApp.directives',
 
-    // Views / Features
+    // Views
     'myApp.home',
     'myApp.upload',
     'myApp.register',
     'myApp.receipt',
     'myApp.navbar',
     'myApp.root',
+
+    // Authentication
     'myApp.userAuthentication'
 ]).
     config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'angular/root/root.html', controller: 'RootController'});
-        $routeProvider.when('/register', {templateUrl: 'angular/register/register.html', controller: 'RegisterController'});
-        $routeProvider.when('/home', {templateUrl: 'angular/home/home.html', controller: 'HomeController'});
-        $routeProvider.when('/upload', {templateUrl: 'angular/upload/upload.html', controller: 'UploadController'});
-        $routeProvider.when('/receipt', {templateUrl: 'angular/receipt/receipt.html', controller: 'ReceiptController'});
-        $routeProvider.when('/about', {templateUrl: 'angular/about/about.html'});
-        $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider
+            .when('/',
+                  { templateUrl: 'angular/root/root.html',
+                    controller: 'RootController'})
+            .when('/register',
+                  { templateUrl: 'angular/register/register.html',
+                    controller: 'RegisterController'})
+            .when('/home',
+                  { templateUrl: 'angular/home/home.html',
+                    controller: 'HomeController'})
+            .when('/upload',
+                  { templateUrl: 'angular/upload/upload.html',
+                    controller: 'UploadController'})
+            .when('/receipt',
+                  { templateUrl: 'angular/receipt/receipt.html',
+                    controller: 'ReceiptController'})
+            .when('/about', { templateUrl: 'angular/about/about.html'})
+            .otherwise({redirectTo: '/'});
     }])
     .run(function($logincheck, $location, $cookies, userService) {
         if (!$cookies.authdata) {
