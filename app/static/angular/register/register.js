@@ -1,5 +1,5 @@
-angular.module("myApp.register", ["myApp.services"])
-    .controller('RegisterCtrl', function($scope, $timeout, $location, userService) {
+angular.module("myApp.register", ["myApp.userAuthentication"])
+    .controller('RegisterController', function($scope, $timeout, $location, userService) {
         // Register dialog
 
         // if (userService.getUsername()){
@@ -21,4 +21,4 @@ angular.module("myApp.register", ["myApp.services"])
         // $timeout(function() {
         //     $location.path('/home');
         // }, 2000);
-    })
+    });

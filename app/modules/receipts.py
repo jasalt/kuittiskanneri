@@ -61,7 +61,7 @@ def get_receipts():
         '''
         limit = request.args.get('limit') or 10
         offset = request.args.get('offset') or 0
-        
+
         receipts = mongo.db.receipts
         user_receipts_cursor = receipts.find(
             {"user": request.authorization['username']})

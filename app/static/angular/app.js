@@ -1,27 +1,18 @@
-var login = angular.module('myLoginCheck', []).
-        factory('$logincheck', function($cookies, $http, userService){
-            // Runs when entering the application
-            // Check user login status
-            return function(){
-                userService.checkCookie();
-            };
-        });
-
-
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
     'ngRoute',
     'ngCookies',
     'myApp.filters',
-    'myApp.services',
     'myApp.directives',
 
     // Views / Features
     'myApp.home',
     'myApp.upload',
     'myApp.register',
+    'myApp.receipt',
     'myApp.navbar',
-    'myLoginCheck'
+    'myApp.root',
+    'myApp.userAuthentication'
 ]).
     config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'angular/root/root.html', controller: 'RootController'});

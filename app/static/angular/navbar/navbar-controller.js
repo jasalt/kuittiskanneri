@@ -1,4 +1,4 @@
-angular.module('myApp.navbar', ['myApp.services'])
+angular.module('myApp.navbar', ['myApp.userAuthentication'])
 
     .controller('NavbarController', function($scope, $location, userService) {
         $scope.isActive = function(viewLocation) {
@@ -28,4 +28,4 @@ angular.module('myApp.navbar', ['myApp.services'])
         };
 
 
-    })
+    });

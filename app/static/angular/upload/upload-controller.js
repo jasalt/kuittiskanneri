@@ -1,4 +1,4 @@
-angular.module('myApp.upload', ['myApp.services', 'angularFileUpload'])
+angular.module('myApp.upload', ['myApp.userAuthentication', 'myApp.receipt', 'angularFileUpload'])
     .controller('UploadController', ['$scope', '$upload', '$location', 'receiptService',
                                function($scope, $upload, $location, receiptService) {
         receiptService.setReceipt(null);
