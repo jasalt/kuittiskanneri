@@ -17,7 +17,7 @@ angular.module('myApp', [
     // Authentication
     'myApp.userAuthentication'
 ]).
-    config(['$routeProvider', function($routeProvider) {
+    config(function($routeProvider, $httpProvider) {
         $routeProvider
             .when('/',
                   { templateUrl: 'angular/root/root.html',
@@ -36,7 +36,10 @@ angular.module('myApp', [
                     controller: 'ReceiptController'})
             .when('/about', { templateUrl: 'angular/about/about.html'})
             .otherwise({redirectTo: '/'});
-    }])
+
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json; charset=utf-8';
+    })
     .run(function($logincheck, $location, $cookies, userService) {
         if (!$cookies.authdata) {
             console.log("User not logged in, redirecting to index");

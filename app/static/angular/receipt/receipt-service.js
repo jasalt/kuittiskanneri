@@ -60,9 +60,9 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
             var methodForRequest = "POST";
             var url = '/api/receipts';
 
-            // TODO if has id, then UPDATE
+            // TODO if has id, then PUT
             if ("_id" in receipt) {
-                methodForRequest = "UPDATE";
+                methodForRequest = "PUT";
                 url = '/api/receipts/' + receipt['_id'];
             }
 

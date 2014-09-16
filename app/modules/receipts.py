@@ -15,7 +15,7 @@ mod = Blueprint('receipts', __name__)
 
 # Actions for element
 @mod.route('/api/receipts/<id>',
-           methods=['GET', 'UPDATE', 'DELETE'])
+           methods=['GET', 'PUT', 'DELETE'])
 @requires_auth
 def receipt(id):
     receipts = mongo.db.receipts
@@ -23,10 +23,11 @@ def receipt(id):
         '''Get receipt specified by ID'''  # TODO
         return {'id': id, 'data': 'GET mocked'}
 
-    if request.method == 'UPDATE': # TODO A
+    if request.method == 'PUT': # TODO A
         '''Update receipt data'''
         # TODO HACK why not json? There's something weird going on.
-        receipt = json.loads(request.data)
+        receipt = request.get_json()
+        import ipdb; ipdb.set_trace()
         receipts.save(receipt)
         return jsonify(receipt)
 
