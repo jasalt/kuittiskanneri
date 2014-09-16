@@ -42,6 +42,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
         $scope.saveReceipt = function() {
             receiptService.saveReceipt($scope.receipt).success(function() {
                 console.log("Save success.");
+                
                 $location.path('/home');
             });
         };

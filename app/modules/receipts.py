@@ -25,17 +25,18 @@ def receipt(id):
 
     if request.method == 'PUT': # TODO A
         '''Update receipt data'''
-        # TODO HACK why not json? There's something weird going on.
         receipt = request.get_json()
-        import ipdb; ipdb.set_trace()
-        receipts.save(receipt)
+        # TODO HACK to not create duplicate entries
+        receipt['_id'] = ObjectId(receipt['_id'])
+        query = receipts.save(receipt)
+
         return jsonify(receipt)
 
     if request.method == 'DELETE':
         '''Delete receipt'''
         # TODO: other users receipts can now be removed by ID
         try:
-            query = receipts.remove(ObjectId(id))
+            query = receipts.remove(id)
             if query[u'n'] is 0:
                 abort(404, "Problem with Mongo remove function")
         except:
@@ -62,7 +63,6 @@ def get_receipts():
         '''
         limit = request.args.get('limit') or 10
         offset = request.args.get('offset') or 0
-
         receipts = mongo.db.receipts
         user_receipts_cursor = receipts.find(
             {"user": request.authorization['username']})
