@@ -2,7 +2,6 @@
 .fileUpload {
     position: relative;
     overflow: hidden;
-    margin: 10px;
 }
 .fileUpload input.upload {
     position: absolute;
@@ -16,11 +15,10 @@
     filter: alpha(opacity=0);
 }
 .upload-drop-box {
-    margin-top: 15px;
-    margin-left: 20px;
+    margin-top: 30px;
     background: #F8F8F8;
     border: 5px dashed #DDD;
-    width: 200px;
+    width: 225px;
     height: 65px;
     text-align: center;
     padding-top: 35px;

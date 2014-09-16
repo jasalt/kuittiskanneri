@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="angular/receipt/receipt.css">
 <div ng-if="editingReceipt">
   <h3>Edit receipt</h3>
   <div class="receipt-details">
@@ -14,14 +15,21 @@
     </div>
   </div>
   <p><strong>Products</strong></p>
+
   <div class="row receipt-product-row" ng-repeat="product in receipt['products']">
     <div class="col-xs-9">
       <input class="form-control" ng-model="product.name" type="text" placeholder="Product title">
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-2">
       <input class="form-control" ng-model="product.price" type="text" placeholder="Price">
     </div>
+    <div class="col-xs-1">
+      <button class="btn btn-danger" ng-click="removeProductField(product)">DEL</button>
+    </div>
   </div>
+
+  <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-success">Add new product</button>
+
   <div class="row well">
     <div class="col-xs-6">
       <label class="control-label" for="inputPayment">Payment type</label>

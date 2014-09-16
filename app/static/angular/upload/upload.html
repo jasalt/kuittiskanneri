@@ -1,19 +1,24 @@
 <link rel="stylesheet" href="angular/upload/upload.css">
 
-<h3>Scan new receipt</h3>
-<div class="fileUpload btn btn-primary">
-  <span>Select file or use mobile camera</span>
-  <input type="file" class="upload" ng-file-select="onFileSelect($files)">
-</div>
-<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)"
-     ng-show="dropSupported" class="upload-drop-box">drop files here</div>
-<div ng-file-drop-available="dropSupported=true"
-     ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+<div class="col-xs-6">
+  <h3>Scan new receipt</h3>
+  <div class="fileUpload btn btn-primary">
+    <span>Select file or use mobile camera</span>
+    <input type="file" class="upload" ng-file-select="onFileSelect($files)">
+  </div>
+  <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)"
+       ng-show="dropSupported" class="upload-drop-box">Drop files from desktop</div> <!-- TODO hide from touchscreen -->
+  <div ng-file-drop-available="dropSupported=true"
+       ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
 
-<div ng-show="loading">
-  <div class="loading"><img src="img/ajax-loader.gif"/></div>
-  <p ng-show="uploadPercent!=100">Upload in progress: {{uploadPercent}}%</p>
-  <p ng-show="uploadPercent==100">Upload finished, waiting OCR...</p>
+  <div ng-show="loading">
+    <div class="loading"><img src="img/ajax-loader.gif"/></div>
+    <p ng-show="uploadPercent!=100">Upload in progress: {{uploadPercent}}%</p>
+    <p ng-show="uploadPercent==100">Upload finished, waiting OCR...</p>
+  </div>
 </div>
-
+<div class="col-xs-6">
+    <h3>Add manually</h3>
+    <button ng-click="addManually()" class="btn btn-primary">Manual add</button>
+</div>
 <!-- <button ng-click="upload.abort()">Cancel Upload</button> -->
