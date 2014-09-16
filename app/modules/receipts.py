@@ -36,7 +36,7 @@ def receipt(id):
         '''Delete receipt'''
         # TODO: other users receipts can now be removed by ID
         try:
-            query = receipts.remove(id)
+            query = receipts.remove(ObjectId(id))
             if query[u'n'] is 0:
                 abort(404, "Problem with Mongo remove function")
         except:
