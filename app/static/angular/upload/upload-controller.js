@@ -1,7 +1,15 @@
-angular.module('myApp.upload', ['myApp.userAuthentication', 'myApp.receipt', 'angularFileUpload'])
-    .controller('UploadController', ['$scope', '$upload', '$location', 'receiptService',
-                               function($scope, $upload, $location, receiptService) {
+angular.module('myApp.upload', ['myApp.userAuthentication',
+                                'myApp.receiptService',
+                                'myApp.receipt',
+                                'angularFileUpload'])
+    .controller('UploadController', function($scope, $upload, $location, receiptService) {
+
         receiptService.setReceipt(null);
+
+        $scope.addManually = function() {
+            $location.path("/receipt");
+        };
+
         $scope.onFileSelect = function($files) {
             console.log("selecting files");
             $scope.loading = true;
@@ -61,4 +69,4 @@ angular.module('myApp.upload', ['myApp.userAuthentication', 'myApp.receipt', 'an
             }
             return hasFile ? "upload-drop-box-dragover" : "upload-drop-box-dragover-err";
         };
-    }])
+    });

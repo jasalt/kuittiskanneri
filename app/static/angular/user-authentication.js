@@ -1,7 +1,7 @@
 /*
  * User account operations and authentication.
  */
-angular.module('myApp.userAuthentication', ['myApp.receipt'])
+angular.module('myApp.userAuthentication', ['myApp.receipt', 'myApp.receiptService'])
 
     .service('userService', function($http, $location, $timeout, $cookies, Base64, receiptService) {
         var user = null;

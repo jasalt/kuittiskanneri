@@ -1,4 +1,4 @@
-angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receipt'])
+angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt'])
 
 //TODO 'HomeCtrl' -> 'HomeController'
     .controller('HomeController', function($scope, receiptService, userService, $location) {

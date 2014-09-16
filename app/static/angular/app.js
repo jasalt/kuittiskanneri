@@ -13,6 +13,7 @@ angular.module('myApp', [
     'myApp.navbar',
     'myApp.root',
 
+    'myApp.receiptService',
     // Authentication
     'myApp.userAuthentication'
 ]).
