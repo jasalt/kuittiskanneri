@@ -5,12 +5,12 @@
     <div class="row well">
       <div class="col-xs-6">
         <label class="control-label" for="inputShop">Shop</label>
-        <input class="form-control" type="text" placeholder="Shop" ng-model="receipt.shop_name" id="inputShop">
+        <input class="form-control" type="text" placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop">
       </div>
 
       <div class="col-xs-6">
         <label class="control-label" for="inputDate">Date</label>
-        <input class="form-control" type="text" placeholder="Date" ng-model="receipt.date" id="inputDate" >
+        <input class="form-control" type="date" placeholder="Date" ng-model="receipt.date" id="inputDate" >
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
       <input class="form-control" ng-model="product.name" type="text" placeholder="Product title">
     </div>
     <div class="col-xs-2">
-      <input class="form-control" ng-model="product.price" type="text" placeholder="Price">
+      <input class="form-control" ng-model="product.price" type="number" step=".01" placeholder="Price">
     </div>
     <div class="col-xs-1">
       <button class="btn btn-danger" ng-click="removeProductField(product)">DEL</button>
@@ -44,7 +44,7 @@
         <label class="control-label" for="inputSum">Total sum</label>
         <div class="input-group" id="inputSum">
           <div class="input-group-addon">€</div>
-          <input class="form-control input-lg" type="text" placeholder="Enter total" ng-model="receipt['total_sum']">
+          <input class="form-control input-lg" type="number" step="0.01" placeholder="Enter total" ng-model="receipt['total_sum']">
         </div>
       </div>
     </div>
