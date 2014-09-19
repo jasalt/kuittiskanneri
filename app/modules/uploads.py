@@ -28,7 +28,6 @@ def simple_upload_receipt():
         if not os.path.exists(app.config['UPLOAD_FOLDER']):
             os.mkdir(app.config['UPLOAD_FOLDER'])
 
-            ##TODO Broken?
         imagepath = os.path.join(app.root_path + '/' +
                                  app.config['UPLOAD_FOLDER'], filename)
         image_file.save(imagepath)

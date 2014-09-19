@@ -26,7 +26,6 @@ def receipt(id):
     if request.method == 'PUT': # TODO A
         '''Update receipt data'''
         receipt = request.get_json()
-        # TODO HACK to not create duplicate entries
         receipt['_id'] = ObjectId(receipt['_id'])
         query = receipts.save(receipt)
 
