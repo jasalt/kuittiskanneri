@@ -28,7 +28,7 @@ def receipt(id):
         receipt = request.get_json()
         receipt['_id'] = ObjectId(receipt['_id'])
         query = receipts.save(receipt)
-
+        # TODO A save receipt product names to autocomplete database
         return jsonify(receipt)
 
     if request.method == 'DELETE':

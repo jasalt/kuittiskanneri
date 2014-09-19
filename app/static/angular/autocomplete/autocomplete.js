@@ -2,6 +2,22 @@
 
 var app = angular.module('autocomplete', []);
 
+// Connect to kuittiskanneri API for autocomplete source list
+app.service('autocompleteService', function($http, $location) {
+    this.getAutocompleteList = function() {
+
+        var promise = $http({method: 'GET', url: '/api/autocomplete'}).
+                success(function(data, status, headers, config) {
+                    console.log("User autocomplete-list loaded");
+                    console.log(data);
+                }).
+                error(function(data, status, headers, config) {
+                    console.log("Something wrong with getting user autocomplete-list..");
+                });
+        return promise;
+    };
+});
+
 app.directive('autocomplete', function() {
     var index = -1;
 

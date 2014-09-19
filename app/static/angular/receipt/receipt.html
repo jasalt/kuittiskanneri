@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="angular/receipt/receipt.css">
-<link rel="stylesheet" href="angular/directives/autocomplete.css">
+<link rel="stylesheet" href="angular/autocomplete/autocomplete.css">
 
 <div ng-if="editingReceipt">
   <h3>Edit receipt</h3>
@@ -21,7 +21,7 @@
   <div class="list-group">
     <div class="row list-group-item receipt-product-row" ng-repeat="product in receipt['products']">
       <div class="col-sm-9">
-        <autocomplete ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="movies" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+        <autocomplete ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
       </div>
       <div class="col-sm-2">
         <input class="form-control" ng-model="product.price" type="number" step=".01" placeholder="Price">
