@@ -16,9 +16,10 @@
       <a class="list-group-item" ng-click="selectReceipt(receipt)">
         <h2 class="pull-right list-group-item-heading receipt-sum">{{receipt.total_sum}} €</h2>
         <h4 class="list-group-item-heading">{{receipt.shop_name}}</h4>
-        <p class="list-group-item-text">
-          {{receipt.date}}
-        </p>
+        <div class="list-group-item-text">
+          <p class="">
+          Date: <strong>{{receipt.date}}</strong> Product count: <strong>{{receipt.products.length}}</strong>
+        </p></div>
       </a>
   </div>
   <button type="button" ng-click="deleteReceipt(receipt['_id']); $event.preventDefault()" class="close pull-left"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
