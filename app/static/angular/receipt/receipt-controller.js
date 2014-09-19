@@ -1,5 +1,6 @@
 angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptService'])
     .controller('ReceiptController', function($scope, $location, receiptService, userService) {
+        $scope.movies = ['Banaani', 'Sipuli'];
         $scope.origReceipt = receiptService.getReceipt();
 
         $scope.editingReceipt = true;
