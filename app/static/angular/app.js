@@ -2,6 +2,7 @@
 angular.module('myApp', [
     'ngRoute',
     'ngCookies',
+    'ngAnimate',
     'myApp.filters',
     'myApp.directives',
 
