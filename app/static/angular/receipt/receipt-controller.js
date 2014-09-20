@@ -2,7 +2,6 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
     .controller('ReceiptController', function($scope, $location, receiptService, userService, autocompleteService) {
         autocompleteService.getAutocompleteList().then(
             function(resp) {
-                debugger;
                 $scope.autocompleteList = resp.data;
             }
         );
