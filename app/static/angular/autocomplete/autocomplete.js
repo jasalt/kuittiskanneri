@@ -9,7 +9,6 @@ app.service('autocompleteService', function($http, $location) {
         var promise = $http({method: 'GET', url: '/api/autocomplete'}).
                 success(function(data, status, headers, config) {
                     console.log("User autocomplete-list loaded");
-                    console.log(data);
                 }).
                 error(function(data, status, headers, config) {
                     console.log("Something wrong with getting user autocomplete-list..");
@@ -254,7 +253,7 @@ app.directive('autocomplete', function() {
             <ul ng-show="completing && suggestions.length>0">\
             <li\
         suggestion\
-        ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:\'toString()\' track by $index"\
+        ng-repeat="suggestion in suggestions | filter:searchFilter | limitTo: 8 | orderBy:\'toString()\' track by $index"\
         index="{{ $index }}"\
         val="{{ suggestion }}"\
         ng-class="{ active: ($index === selectedIndex) }"\

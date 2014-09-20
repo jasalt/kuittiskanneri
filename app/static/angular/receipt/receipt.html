@@ -39,8 +39,8 @@
       <label class="control-label" for="inputPayment">Payment type</label>
       <br />
       <div class="btn-group-vertical" id="inputPayment">
-        <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
-        <button type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
+        <button type="button" class="btn btn-default btn-lg" style="z-index:0;" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
+        <button type="button" class="btn btn-default btn-lg" style="z-index:0;" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
       </div>
     </div>
     <div class="col-xs-6">
@@ -48,7 +48,7 @@
         <label class="control-label" for="inputSum">Total sum</label>
         <div class="input-group" id="inputSum">
           <div class="input-group-addon">€</div>
-          <input class="form-control input-lg" type="number" step="0.01" placeholder="" ng-model="receipt['total_sum']">
+          <input class="form-control input-lg" style="z-index:0;"  type="number" step="0.01" placeholder="" ng-model="receipt['total_sum']">
         </div>
       </div>
     </div>

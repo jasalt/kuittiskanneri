@@ -16,7 +16,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
                 console.log($scope.origReceipt['_id']);
                 $scope.editingReceipt = false;
             }
-            console.log("Editing unsaved receipt");
+            //console.log("Editing unsaved receipt");
         } else {
             console.log("Creating a new receipt");
             $scope.origReceipt = { "products": [],

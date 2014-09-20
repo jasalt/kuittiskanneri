@@ -34,7 +34,6 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
             var promise = $http({method: 'GET', url: '/api/receipts'}).
                     success(function(data, status, headers, config) {
                         console.log("User receipts loaded");
-                        console.log(data);
                     }).
                     error(function(data, status, headers, config) {
                         console.log("Something wrong with getting user receipts..");

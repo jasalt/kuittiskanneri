@@ -40,7 +40,7 @@ def ac_get():
     user = users.find_one(
         {"_id": request.authorization['username']})
     # TODO use dict, array dumps not probably secure
-    return json.dumps(user['products'])  # + GLOBAL_AC_LIST
+    return json.dumps(user['products'] + GLOBAL_AC_LIST)
 
 
 def ac_add_user_products(receipt):
