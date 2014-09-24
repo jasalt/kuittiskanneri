@@ -12,18 +12,26 @@
 <div ng-show="receipts" class="receipt-history-list">
   <h2>Recent history</h2>
 
-<div ng-repeat="receipt in receipts" class="repeat-item">
-  <div class="list-group col-xs-11">
+  <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item">
+    <div class="list-group col-xs-11">
 
       <a class="list-group-item" ng-click="selectReceipt(receipt)">
         <h2 class="pull-right list-group-item-heading receipt-sum">{{receipt.total_sum}} €</h2>
         <h4 class="list-group-item-heading">{{receipt.shop_name}}</h4>
         <div class="list-group-item-text">
           <p class="">
-          Date: <strong>{{receipt.date}}</strong> Product count: <strong>{{receipt.products.length}}</strong>
+            Date: <strong>{{receipt.date}}</strong> Product count: <strong>{{receipt.products.length}}</strong>
         </p></div>
       </a>
+    </div>
+    <button type="button" ng-click="deleteReceipt(receipt['_id']); $event.preventDefault()" class="close pull-left"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   </div>
-  <button type="button" ng-click="deleteReceipt(receipt['_id']); $event.preventDefault()" class="close pull-left"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-</div>
+
+  <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+    Previous
+  </button>
+  {{currentPage+1}}/{{numberOfPages()}}
+  <button ng-disabled="currentPage >= receipts.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+    Next
+  </button>
 </div>

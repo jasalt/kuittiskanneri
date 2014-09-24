@@ -66,7 +66,7 @@ def get_receipts():
         ''' List all receipts for request user.
         Pagination is set by limit and offset variables.
         '''
-        limit = request.args.get('limit') or 10
+        limit = request.args.get('limit') or 1000
         offset = request.args.get('offset') or 0
         receipts = mongo.db.receipts
         user_receipts_cursor = receipts.find(

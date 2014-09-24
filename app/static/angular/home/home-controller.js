@@ -3,6 +3,10 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
 //TODO 'HomeCtrl' -> 'HomeController'
     .controller('HomeController', function($scope, receiptService, userService, $location) {
         $scope.loading = true;
+
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
+
         console.log("Getting receipts for " + userService.getUsername());
         receiptService.getUserReceipts().then(function(result) {
             $scope.loading = false;
@@ -12,8 +16,13 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
             }
             else {
                 $scope.receipts = receipts;
+
+                $scope.numberOfPages = function(){
+                    return Math.ceil($scope.receipts.length/$scope.pageSize);
+                };
             }
         });
+
 
         /*
          * When selecting a receipt from history, set it as current and redirect to receipt view
@@ -29,5 +38,12 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
                 $scope.receipts = _.without($scope.receipts, _.findWhere(
                     $scope.receipts, {'_id': receiptid}));
             });
+        };
+    })
+
+    .filter('startFrom', function() {
+        return function(input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
         };
     });
