@@ -34,6 +34,7 @@
 
       <li ng-if="user" ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
       <li ng-if="user" ng-class="{ active: isActive('/upload')}"><a href="#/upload">Upload</a></li>
+      <li ng-if="user" ng-class="{ active: isActive('/stats')}"><a href="#/stats">Statistics</a></li>
 
       <li ng-if="!user" ng-class="{ active: isActive('/register')}"><a href="#/register">Register</a></li>
       <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
@@ -70,7 +71,8 @@
     <script src="angular/root/root-controller.js"></script>
     <script src="angular/user-authentication.js"></script>
 
+    <script src="angular/stats/stats-controller.js"></script>
+
     <script src="angular/autocomplete/autocomplete.js"></script>
-    <script src="angular/visualization/datehistogram.js"></script>
   </body>
 </html>

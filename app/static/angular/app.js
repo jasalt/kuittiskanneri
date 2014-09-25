@@ -11,11 +11,12 @@ angular.module('myApp', [
     'myApp.receipt',
     'myApp.navbar',
     'myApp.root',
+    'myApp.stats',
 
     'myApp.receiptService',
     // Authentication
     'myApp.userAuthentication',
-    'autocomplete'
+    'autocomplete',
 ]).
     config(function($routeProvider, $httpProvider) {
         $routeProvider
@@ -31,6 +32,9 @@ angular.module('myApp', [
             .when('/upload',
                   { templateUrl: 'angular/upload/upload.html',
                     controller: 'UploadController'})
+            .when('/stats',
+                  { templateUrl: 'angular/stats/stats.html',
+                    controller: 'StatsController'})
             .when('/receipt',
                   { templateUrl: 'angular/receipt/receipt.html',
                     controller: 'ReceiptController'})
