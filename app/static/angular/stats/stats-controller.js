@@ -1,6 +1,18 @@
 angular.module("myApp.stats", [])
     .controller('StatsController', function ($scope, receiptService) {
-
+        $scope.mockData = {
+            //_type: "date_histogram",
+            entries : [{
+                time : 1341100800000,
+                count : 9
+            }, {
+                time : 1343779200000,
+                count : 32
+            }, {
+                time : 1346457600000,
+                count : 78
+            }]
+        };
     })
 
     .directive('fsDateHisto', [function() {
