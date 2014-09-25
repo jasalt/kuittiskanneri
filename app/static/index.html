@@ -38,10 +38,10 @@
       <li ng-if="!user" ng-class="{ active: isActive('/register')}"><a href="#/register">Register</a></li>
       <li ng-class="{ active: isActive('/about')}"><a href="#/about">About</a></li>
 
-   <!-- <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li> -->
+      <!-- <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li> -->
 
-   <button ng-if="user" class="btn btn-danger pull-right" ng-click="logout()">Logout {{user}}</button>
-   <button ng-if="!user" class="btn btn-default pull-right" ng-click="login()">Login</button>
+      <button ng-if="user" class="btn btn-danger pull-right" ng-click="logout()">Logout {{user}}</button>
+      <button ng-if="!user" class="btn btn-default pull-right" ng-click="login()">Login</button>
 
     </ul>
 
@@ -60,8 +60,6 @@
     <script src="libs/underscore.js"></script>
 
     <script src="angular/app.js"></script>
-    <script src="angular/filters.js"></script>
-    <script src="angular/directives.js"></script>
 
     <script src="angular/home/home-controller.js"></script>
     <script src="angular/upload/upload-controller.js"></script>
@@ -73,5 +71,6 @@
     <script src="angular/user-authentication.js"></script>
 
     <script src="angular/autocomplete/autocomplete.js"></script>
+    <script src="angular/visualization/datehistogram.js"></script>
   </body>
 </html>
