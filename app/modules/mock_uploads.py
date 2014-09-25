@@ -35,7 +35,13 @@ def upload_receipt():
         image_file.save(imagepath)
         app.logger.debug("Upload OK, saved file " + imagepath)
 
-        ocr_readings = dict({"date": None, "total_sum": None, "credit_card": False, "products": [], "shop_name": "* u m nmumnnulrpmtwwlvlwmmdjrmiwii"})
+        ocr_readings = dict({'credit_card': True, 'total_sum': 4.68,
+                             'shop_name': "Mock Market", 'products':
+                             [{'price': 1.59, 'name': 'Elonen ruisevas 540g'},
+                              {'price': 0.75, 'name': 'Pirkka hanaani'},
+                              {'price': 1.59, 'name': 'Elonen ruisevas 540g'},
+                              {'price': 0.75, 'name': 'Pirkka hanaani'}],
+                             'date': 2014-10-12})
 
         # TODO create a new receipt object to db and return it
         return jsonify(ocr_readings)
