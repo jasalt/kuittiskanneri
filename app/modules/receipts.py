@@ -1,4 +1,3 @@
-import json
 from flask import Blueprint, request, abort
 from flask.ext.pymongo import ObjectId
 
@@ -24,7 +23,7 @@ def receipt(id):
         '''Get receipt specified by ID'''  # TODO
         return {'id': id, 'data': 'GET mocked'}
 
-    if request.method == 'PUT': # TODO A
+    if request.method == 'PUT':
         '''Update receipt data'''
         receipt = request.get_json()
         receipt['_id'] = ObjectId(receipt['_id'])
@@ -53,6 +52,7 @@ def receipt(id):
 @requires_auth
 def get_receipts():
     receipts = mongo.db.receipts
+
     if request.method == 'POST':
         '''Create new receipt'''
         receipt = request.json
@@ -80,4 +80,3 @@ def get_receipts():
                             'total': len(user_receipts),
                             'from': offset,
                             'to': offset + limit}})
-

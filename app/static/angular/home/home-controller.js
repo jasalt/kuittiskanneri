@@ -1,6 +1,4 @@
 angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt'])
-
-//TODO 'HomeCtrl' -> 'HomeController'
     .controller('HomeController', function($scope, receiptService, userService, $location) {
         $scope.loading = true;
 
@@ -11,7 +9,7 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
         receiptService.getUserReceipts().then(function(result) {
             $scope.loading = false;
             var receipts = result.data.receipts;
-            if (receipts.length == 0){
+            if (receipts.length === 0){
                 return;
             }
             else {
@@ -40,10 +38,14 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
             });
         };
     })
-
     .filter('startFrom', function() {
+        /*
+         * For home page pagination. Used with builtin LimitTo filter.
+         */
         return function(input, start) {
+            // HACKFIX missing input
+            var input0 = input || "";
             start = +start; //parse to int
-            return input.slice(start);
+            return input0.slice(start);
         };
     });

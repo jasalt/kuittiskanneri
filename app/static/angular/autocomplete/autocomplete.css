@@ -41,6 +41,7 @@
 
     /* HACKFIX strange 40px padding by browser useragent */
     -webkit-padding-start: 0px;
+    -moz-padding-start: 0px;
 }
 
 .autocomplete li{
