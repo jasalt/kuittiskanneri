@@ -9,7 +9,7 @@
 
 <h2 ng-show="!receipts && !loading">You haven't uploaded any receipts yet!</h2>
 
-<div ng-show="receipts" class="receipt-history-list">
+<div ng-show="receipts" class="receipt-history-list row">
   <h2>Recent history</h2>
 
   <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item">
@@ -26,11 +26,13 @@
     <button type="button" ng-click="deleteReceipt(receipt['_id']); $event.preventDefault()" class="close pull-left"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   </div>
 
-  <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+</div>
+<div class="row">
+  <button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
     Previous
   </button>
   {{currentPage+1}}/{{numberOfPages()}}
-  <button ng-disabled="currentPage >= receipts.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+  <button class="btn btn-default" ng-disabled="currentPage >= receipts.length/pageSize - 1" ng-click="currentPage=currentPage+1">
     Next
   </button>
 </div>
