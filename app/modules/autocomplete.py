@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 '''
 Autocomplete utilities and endpoints.
 
@@ -8,6 +10,7 @@ TODO: scrape some general autocomplete-sources
 '''
 import json
 import os
+import codecs
 from flask import Blueprint, request
 from utils import jsonify
 from app import mongo
@@ -20,15 +23,15 @@ GLOBAL_AC_LIST = []
 
 def load_autocomplete_files():
     ''' Load scraped product lists to memory '''
-    f = open('data/xtra.txt')
-    lines = f.readlines()
-    f.close()
-    GLOBAL_AC_LIST.extend(lines)
+    with codecs.open('data/xtra.txt', 'r', encoding='utf8') as f:
+        lines = f.readlines()
+        f.close()
+        GLOBAL_AC_LIST.extend(lines)
 
-    f = open('data/rainbow.txt')
-    lines = f.readlines()
-    f.close()
-    GLOBAL_AC_LIST.extend(lines)
+    with codecs.open('data/rainbow.txt', 'r', encoding='utf8') as f:
+        lines = f.readlines()
+        f.close()
+        GLOBAL_AC_LIST.extend(lines)
 
 
 load_autocomplete_files()
@@ -59,7 +62,8 @@ def ac_add_user_products(receipt):
     new_user_products = []
 
     for product in receipt['products']:
-        if product['name'] not in user_products:
+        name = product['name']
+        if name not in user_products and name not in GLOBAL_AC_LIST:
             new_user_products.append(product['name'])
 
     # Append new products to database
