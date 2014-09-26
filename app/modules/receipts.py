@@ -30,7 +30,6 @@ def receipt(id):
         query = receipts.save(receipt)
         # TODO A save receipt product names to autocomplete database
         ac_add_user_products(receipt)
-
         # add if not exists
 
         return jsonify(receipt)

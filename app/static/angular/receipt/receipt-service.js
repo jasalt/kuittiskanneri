@@ -68,7 +68,6 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
             } else {
                 console.log("Create new receipt (no _id)");
             }
-
             var promise = $http({method: methodForRequest, url: url,
                                  data: receipt})
                     .error(function(data, status, headers, config) {
