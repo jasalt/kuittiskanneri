@@ -1,5 +1,6 @@
+"use strict";
 angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptService', 'autocomplete'])
-    .controller('ReceiptController', function($scope, $location, receiptService, userService, autocompleteService) {
+    .controller('ReceiptController', function($scope, $location, $filter, receiptService, userService, autocompleteService) {
         autocompleteService.getAutocompleteList().then(
             function(resp) {
                 $scope.autocompleteList = resp.data;
@@ -13,7 +14,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
             if ("_id" in $scope.origReceipt){
                 // The receipt is new so start editing.
                 console.log("Editing a stored receipt");
-                console.log($scope.origReceipt['_id']);
+                console.log($scope.origReceipt._id);
                 $scope.editingReceipt = false;
             }
             //console.log("Editing unsaved receipt");
@@ -24,20 +25,19 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
                                    total_sum: null,
                                    shop_name: null,
                                    user: userService.getUsername(),
-                                   date: "today" // TODO set this date
-                                   // TODO datepicker
+                                   date: Date.now()  // Epoch time
                                  };
         }
-
         $scope.receipt = $scope.origReceipt;
+        $scope.receipt.date = $filter('date')($scope.receipt.date, 'yyyy-MM-dd');  // epoch -> "2014-09-26"
 
         $scope.addProductField = function() {
-            $scope.receipt["products"].push({});
+            $scope.receipt.products.push({});
 
         };
 
         $scope.removeProductField = function(product) {
-            $scope.receipt["products"] = _.without($scope.receipt.products, product);
+            $scope.receipt.products = _.without($scope.receipt.products, product);
         };
 
         $scope.changePaymentType = function() {
@@ -45,9 +45,12 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
         };
 
         $scope.saveReceipt = function() {
+            // TODO validate input
+            // Delete empty
+            // Calculate sum
+            $scope.receipt.date = Date.now($scope.receipt.date);  // 2014-09-26 -> epoch
             receiptService.saveReceipt($scope.receipt).success(function() {
                 console.log("Save success.");
-                
                 $location.path('/home');
             });
         };

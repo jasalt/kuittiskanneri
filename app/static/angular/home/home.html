@@ -19,7 +19,7 @@
         <h4 class="list-group-item-heading">{{receipt.shop_name}}</h4>
         <div class="list-group-item-text">
           <p class="">
-            Date: <strong>{{receipt.date}}</strong> Product count: <strong>{{receipt.products.length}}</strong>
+            Date: <strong>{{receipt.date | date: 'yyyy-MM-dd' }}</strong> Product count: <strong>{{receipt.products.length}}</strong>
         </p></div>
       </a>
     </div>

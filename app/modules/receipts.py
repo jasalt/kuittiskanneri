@@ -52,11 +52,11 @@ def receipt(id):
 @requires_auth
 def get_receipts():
     receipts = mongo.db.receipts
-
     if request.method == 'POST':
         '''Create new receipt'''
         receipt = request.json
         receipt['user'] = request.authorization['username']
+        # TODO Validate input, add date if missing etc
         db_operation = receipts.insert(receipt)
         ac_add_user_products(receipt)
         return jsonify({'savedReceipt': receipt, 'dbOperation': db_operation})
