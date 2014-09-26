@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="angular/home/home.css">
+<link rel="stylesheet" href="angular/stats/stats.css">
 
 <h1>Home</h1>
 <a class="btn btn-lg btn-primary" href="#/upload">Add new receipt</a>
@@ -9,10 +10,12 @@
 
 <h2 ng-show="!receipts && !loading">You haven't uploaded any receipts yet!</h2>
 
-<div ng-show="receipts" class="receipt-history-list row">
+<div ng-show="receipts" class="receipt-history-list col-xs-11">
   <h2>Recent history</h2>
-
-  <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item">
+<div class="row col-xs-11">
+  <fs-date-histo bind="histogramData" on-click="alert('je')" />
+</div>
+  <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item row">
     <div class="list-group col-xs-11">
       <a class="list-group-item" ng-click="selectReceipt(receipt)">
         <h2 class="pull-right list-group-item-heading receipt-sum">{{receipt.total_sum}} €</h2>
@@ -27,7 +30,9 @@
   </div>
 
 </div>
-<div class="row">
+
+<div class="row col-xs-12">
+
   <button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
     Previous
   </button>
@@ -35,4 +40,5 @@
   <button class="btn btn-default" ng-disabled="currentPage >= receipts.length/pageSize - 1" ng-click="currentPage=currentPage+1">
     Next
   </button>
+
 </div>

@@ -16,7 +16,8 @@ angular.module('myApp', [
     'myApp.receiptService',
     // Authentication
     'myApp.userAuthentication',
-    'autocomplete',
+    'datehistogram',
+    'autocomplete'
 ]).
     config(function($routeProvider, $httpProvider) {
         $routeProvider
