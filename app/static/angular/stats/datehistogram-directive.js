@@ -21,7 +21,8 @@ angular.module("datehistogram", [])
         field:     '@',
         duration:  '@',
         delay:     '@',
-        interval:  '@'
+        interval:  '@',
+        barwidth:  '@'
       },
 
       // angular directives return a link fn
@@ -38,7 +39,7 @@ angular.module("datehistogram", [])
         var width = scope.width || 1280;
         var height = scope.height || 300;
 
-        var label = attrs.label || 'Frequency';
+        var label = attrs.label || 'Price';
         var klass = attrs.class || '';
 
         // add margin (make room for x,y labels)
@@ -104,7 +105,7 @@ angular.module("datehistogram", [])
 
             // calculate the bar width based on the data length leaving
             // a 2 pixel "gap" between bars.
-            var barWidth = width/data.length - 2;
+            var barWidth = scope.barwidth || 10; //width/data.length - 2;
 
             var intervalMsecs = 86400000;
 

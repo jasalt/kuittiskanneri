@@ -11,9 +11,9 @@
 <h2 ng-show="!receipts && !loading">You haven't uploaded any receipts yet!</h2>
 
 <div ng-show="receipts" class="receipt-history-list col-xs-11">
-  <h2>Recent history</h2>
+  <h2>History</h2>
 <div class="row col-xs-11">
-  <fs-date-histo bind="histogramData" on-click="alert('je')" />
+  <fs-date-histo bind="histogramData" interval="day" barwidth="20"/>
 </div>
   <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item row">
     <div class="list-group col-xs-11">

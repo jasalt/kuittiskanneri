@@ -50,6 +50,7 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
         // After successful delete, remove from scope also
         $scope.receipts = _.without($scope.receipts, _.findWhere(
           $scope.receipts, {'_id': receiptid}));
+        data_to_histogram($scope.receipts);
       });
     };
   })
