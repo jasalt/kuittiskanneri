@@ -1,9 +1,11 @@
-/* --- Made by justgoscha and licensed under MIT license --- */
-
-var app = angular.module('autocomplete', []);
-
-// Connect to kuittiskanneri API for autocomplete source list
-app.service('autocompleteService', function($http, $location) {
+/*
+ * AngularJS Client controller for a simple product name autocomplete AJAX service.
+ * Author: justgoscha (MIT-license)
+ */
+"use strict";
+var app = angular.module('autocomplete', [])
+// Connect to API for autocomplete ac-source list
+.service('autocompleteService', function($http) {
     this.getAutocompleteList = function() {
 
         var promise = $http({method: 'GET', url: '/api/autocomplete'}).
@@ -15,9 +17,8 @@ app.service('autocompleteService', function($http, $location) {
                 });
         return promise;
     };
-});
-
-app.directive('autocomplete', function() {
+})
+.directive('autocomplete', function() {
     var index = -1;
 
     return {
@@ -279,9 +280,9 @@ app.filter('highlight', ['$sce', function ($sce) {
         }
         return $sce.trustAsHtml(input);
     };
-}]);
+}])
 
-app.directive('suggestion', function(){
+.directive('suggestion', function(){
     return {
         restrict: 'A',
         require: '^autocomplete', // ^look for controller on parents element

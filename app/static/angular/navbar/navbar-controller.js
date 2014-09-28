@@ -11,9 +11,8 @@ angular.module('myApp.navbar', ['myApp.userAuthentication'])
     // TODO get information about change from message as this value is not updated
     // listen for changes in location or messages and re-query
 
-    $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
+    $scope.$on("$routeChangeSuccess", function() {
       $scope.user = userService.getUsername();
-      //console.log("route change");
       if (!$scope.user) {
         console.log("Not logged in.");
       }

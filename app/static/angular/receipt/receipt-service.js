@@ -1,3 +1,4 @@
+"use strict";
 angular.module('myApp.receiptService', ['myApp.userAuthentication'])
     .service('receiptService', function($http, $location) {
         /*
@@ -42,7 +43,7 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
         };
 
 
-        this.discardReceipt = function(rcpt) {
+        this.discardReceipt = function() {
             receipt = null;
             $location.path('/home');
         };
@@ -64,13 +65,13 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
             if ("_id" in receipt) {
                 console.log("Update old receipt (has _id)");
                 methodForRequest = "PUT";
-                url = '/api/receipts/' + receipt['_id'];
+              url = '/api/receipts/' + receipt._id;
             } else {
                 console.log("Create new receipt (no _id)");
             }
             var promise = $http({method: methodForRequest, url: url,
                                  data: receipt})
-                    .error(function(data, status, headers, config) {
+                    .error(function() {
                         console.log("Something wrong with saving receipt.. duplicate maybe?");
                     });
             return promise;
