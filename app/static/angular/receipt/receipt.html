@@ -11,7 +11,6 @@
         <label class="control-label" for="inputShop">Shop</label>
         <input required class="form-control" type="text"  placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop">
       </div>
-
       <div class="col-xs-6">
         <label required class="control-label" for="inputDate">Date created</label>
         <input class="form-control" type="date" placeholder="Date" ng-model="receipt.date" id="inputDate" >
@@ -29,32 +28,18 @@
         <input class="form-control" ng-model="product.price" type="number" step=".01" placeholder="Price">
       </div>
       <div class="col-sm-1 pull-right">
-        <button class="btn btn-danger" ng-click="removeProductField(product)">DEL</button>
+        <button class="btn btn-default" ng-click="removeProductField(product)"><span class="glyphicon glyphicon-trash"></span></button>
       </div>
     </div>
   </div>
 
-  <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-success">Add new product</button>
-
-  <div class="row well">
-    <div class="col-xs-6">
-      <label class="control-label" for="inputPayment">Payment type</label>
-      <br />
-      <div class="btn-group-vertical" id="inputPayment">
-        <button type="button" class="btn btn-default btn-lg" style="z-index:0;" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
-        <button type="button" class="btn btn-default btn-lg" style="z-index:0;" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="form-group">
-        <label class="control-label" for="inputSum">Total sum</label>
-        <div class="input-group" id="inputSum">
-          <div class="input-group-addon">€</div>
-          <input disabled class="form-control input-lg" style="z-index:0;"  type="number" step="0.01" placeholder="" ng-model="receipt['total_sum']">
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-default col-xs-5"><span class="glyphicon glyphicon-plus"></span>Add new product</button>
+  <div class="form-group col-xs-7">
+    <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
   </div>
+</div>
+
   <div class="row bottom-controls">
     <div class="col-xs-6">
       <button class="btn btn-success btn-block btn-lg" ng-click="saveReceipt()">Save receipt</button>
@@ -91,28 +76,15 @@
     </div>
   </div>
 
-  <div class="row well">
-    <div class="col-xs-6">
-      <label class="control-label" for="inputPayment">Payment type</label>
-      <br />
-      <div class="btn-group-vertical" id="inputPayment">
-        <button disabled type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: receipt.credit_card}">Card</button>
-        <button disabled type="button" class="btn btn-default btn-lg" ng-click="changePaymentType()" ng-class="{active: !receipt.credit_card}">Cash</button>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="form-group">
-        <label class="control-label" for="inputSum">Total sum</label>
-        <div class="input-group" id="inputSum">
-          <div class="input-group-addon">€</div>
-          <input disabled class="form-control input-lg" type="text" placeholder="" ng-model="receipt['total_sum']">
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="form-group col-xs-12">
+    <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
   </div>
+</div>
+
   <div class="row bottom-controls">
     <div class="col-xs-6">
-      <button class="btn btn-success btn-block btn-lg" ng-click="editReceipt()">Edit receipt</button>
+      <button class="btn btn-success btn-block btn-lg" ng-click="editReceipt()">Edit receipt <span class="glyphicon glyphicon-edit"></span></button>
     </div>
     <div class="col-xs-6">
       <a href="#/home" class="btn btn-danger btn-block btn-lg">Go back</a>
