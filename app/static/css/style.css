@@ -38,3 +38,32 @@ canvas {
     padding: 5px;
     margin: 5px;
 }
+
+.view-animate.ng-enter {
+    /* -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s; */
+    /* transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s; */
+
+    -webkit-transition:all linear 0.3s;
+    transition:all linear 0.3s;
+
+}
+
+.view-animate.ng-enter {
+    /* -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s; */
+    /* transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s; */
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-delay: 0.3s;
+    -webkit-transition:all linear 0.3s;
+    transition:all linear 0.3s;
+
+}
+
+.view-animate.ng-enter {
+    opacity:0;
+}
+.view-animate.ng-enter.ng-enter-active {
+    opacity:1;
+}
+.view-animate.ng-leave.ng-leave-active {
+    opacity:0;
+}
