@@ -1,8 +1,8 @@
 /* you can also define the transition style
    on the base class as well (.repeat-item) */
 .repeat-item.ng-enter {
-    -webkit-transition:0.5s linear all;
-    transition:0.5s linear all;
+    -webkit-transition:0.3s linear all;
+    transition:0.3s linear all;
 }
 
 .repeat-item.ng-enter,
@@ -15,8 +15,8 @@
 }
 
 .repeat-item {
-  -webkit-transition:all linear 0.4s;
-  transition:all linear 0.4s;
+  -webkit-transition:all linear 0.2s;
+  transition:all linear 0.2s;
 }
 
 .repeat-item.ng-hide {
