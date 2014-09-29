@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime
 from flask import Blueprint, request
 from werkzeug.utils import secure_filename
 from utils import jsonify
