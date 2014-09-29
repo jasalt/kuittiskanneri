@@ -1,24 +1,32 @@
 <link rel="stylesheet" href="angular/upload/upload.css">
+<div class="upload-controls-fadeout" ng-show="!loading">
+  <div class="col-sm-6">
+    <h3>Scan new receipt</h3>
+    <div class="fileUpload btn btn-primary">
+      <span>Select file or use mobile camera</span>
+      <input type="file" class="upload" ng-file-select="onFileSelect($files)">
+    </div>
+    <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)"
+         ng-show="dropSupported" class="upload-drop-box">Drop files from desktop</div> <!-- TODO hide from touchscreen -->
+    <div ng-file-drop-available="dropSupported=true"
+         ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
 
-<div class="col-sm-6">
-  <h3>Scan new receipt</h3>
-  <div class="fileUpload btn btn-primary">
-    <span>Select file or use mobile camera</span>
-    <input type="file" class="upload" ng-file-select="onFileSelect($files)">
   </div>
-  <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="dragOverClass($event)"
-       ng-show="dropSupported" class="upload-drop-box">Drop files from desktop</div> <!-- TODO hide from touchscreen -->
-  <div ng-file-drop-available="dropSupported=true"
-       ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-
-  <div ng-show="loading">
-    <div class="loading"><img src="img/ajax-loader.gif"/></div>
-    <p ng-show="uploadPercent!=100">Upload in progress: {{uploadPercent}}%</p>
-    <p ng-show="uploadPercent==100">Upload finished, waiting OCR...</p>
-  </div>
-</div>
-<div class="col-sm-6">
+  <div class="col-sm-6">
     <h3>Add manually</h3>
     <button ng-click="addManually()" class="btn btn-primary">Manual add</button>
+  </div>
 </div>
+
+<div class="loading-indicator-container">
+<div ng-show="loadingText" class="loading-text">
+  <h1 class="text-center">Uploading image..</h1>
+</div>
+<div ng-show="uploadPercent==100 && loadingOcr" class="loading-text text-center">
+  <h1>Scanning image..</h1>
+  <p>(Normally takes around 10 seconds)</p>
+</div>
+</div>
+
+
 <!-- <button ng-click="upload.abort()">Cancel Upload</button> -->

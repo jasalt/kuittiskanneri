@@ -2,14 +2,11 @@
 
 angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt', 'datehistogram'])
   .controller('HomeController', function($scope, receiptService, userService, $location) {
-    $scope.loading = true;
-
     $scope.currentPage = 0;
     $scope.pageSize = 10;
 
     console.log("Getting receipts for " + userService.getUsername());
     receiptService.getUserReceipts().then(function(result) {
-      $scope.loading = false;
       var receipts = result.data.receipts;
       if (receipts.length === 0){
         return;

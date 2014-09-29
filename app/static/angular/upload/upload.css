@@ -30,3 +30,24 @@
 .upload-drop-box-dragover-err {
     background-color: red;
 }
+
+.upload-controls-fadeout {
+  -webkit-transition:all linear 0.2s;
+  transition:all linear 0.2s;
+}
+
+.upload-controls-fadeout.ng-hide {
+  opacity:0;
+}
+
+.loading-indicator-container {
+    padding-top: 30px;
+}
+.loading-text {
+  -webkit-transition:all linear 1s;
+  transition:all linear 1s;
+
+}
+.loading-text.ng-hide {
+  opacity:0;
+}
