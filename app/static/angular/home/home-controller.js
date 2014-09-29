@@ -1,11 +1,14 @@
 "use strict";
 
 angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt', 'datehistogram'])
-  .controller('HomeController', function($scope, receiptService, userService, $location) {
+  .controller('HomeController', function($scope, receiptService, userService, $location, $timeout) {
     $scope.currentPage = 0;
     $scope.pageSize = 10;
 
     console.log("Getting receipts for " + userService.getUsername());
+    $timeout(function() {
+      $scope.delaySpent = true;
+    },500);
     receiptService.getUserReceipts().then(function(result) {
       var receipts = result.data.receipts;
       if (receipts.length === 0){

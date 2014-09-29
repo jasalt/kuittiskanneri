@@ -101,11 +101,9 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
       receipt.products.forEach(function(entry) {
         // Skip empty fields
         if (!isNaN(entry.price)){
-          console.log("price : " + entry.price );
           newSum += entry.price;
         }
       });
-      console.log("sum is " + newSum);
       $scope.receipt.total_sum = Math.round(newSum * 100) / 100;
     };
 
