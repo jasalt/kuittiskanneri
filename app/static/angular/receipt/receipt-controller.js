@@ -19,7 +19,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
       //console.log("Editing unsaved receipt");
     } else {
       console.log("Creating a new receipt");
-      var origReceipt = { "products": [],
+      var origReceipt = { "products": [{}],
                           credit_card: false,
                           total_sum: null,
                           shop_name: null,
@@ -49,6 +49,35 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
       // TODO validate input
       // Delete empty
       // Calculate sum
+
+      // Check for missing receipts
+      
+     
+
+      
+      // Check for empty product name-fields
+      $scope.receipt.products.forEach(function(product) {
+        if (!product.name) {
+          if (!product.price){
+            // Remove empty product-fields
+            $scope.receipt.products = _.without($scope.receipt.products, product);
+          } else {
+            alert("Fill blank product names!");
+            return;
+          }
+        }
+      });
+
+      if ($scope.receipt.products.length === 0){
+        alert("Please add some products before saving.");
+        $scope.receipt.products.push({});
+        return;
+      }
+
+      // Check for shop name
+      if (!$scope.receipt.shop_name) {
+        $scope.receipt.shop_name = "Default";
+      }
 
       $scope.receipt.date = Date.parse($scope.receipt.date);  // 2014-09-26 -> epoch
 

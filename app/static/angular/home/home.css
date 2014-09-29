@@ -13,3 +13,12 @@
 .repeat-item.ng-enter.ng-enter-active {
     opacity:1;
 }
+
+.repeat-item {
+  -webkit-transition:all linear 0.4s;
+  transition:all linear 0.4s;
+}
+
+.repeat-item.ng-hide {
+    opacity:0;
+}

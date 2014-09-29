@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="angular/receipt/receipt.css">
+<!-- reuse animations -->
+<link rel="stylesheet" href="angular/home/home.css">
 <link rel="stylesheet" href="angular/autocomplete/autocomplete.css">
 
 <div ng-if="editingReceipt">
@@ -19,9 +21,9 @@
   <p><strong>Products</strong></p>
 
   <div class="list-group">
-    <div class="row list-group-item receipt-product-row" ng-repeat="product in receipt['products']">
+    <div class="row list-group-item repeat-item receipt-product-row" ng-repeat="product in receipt['products']">
       <div class="col-sm-9">
-        <autocomplete ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+        <autocomplete required ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
       </div>
       <div class="col-sm-2">
         <input class="form-control" ng-model="product.price" type="number" step=".01" placeholder="Price">
