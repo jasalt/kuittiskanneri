@@ -62,5 +62,29 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
       $scope.editingReceipt = !$scope.editingReceipt;
     };
 
+    /*
+     * Calculates sum from current receipt product prices
+     */
+    var calculateSum = function(receipt) {
+      // loop all prices
+      // set total_sum
+      var newSum = 0;
+      receipt.products.forEach(function(entry) {
+        // Skip empty fields
+        if (!isNaN(entry.price)){
+          console.log("price : " + entry.price );
+          newSum += entry.price;
+        }
+      });
+      console.log("sum is " + newSum);
+      $scope.receipt.total_sum = newSum;
+    };
+
+    $scope.$watch('receipt', function(newValue, oldValue) {
+      console.log("changed receipt");
+      calculateSum($scope.receipt);
+    }, true);
+
     $scope.discardReceipt = receiptService.discardReceipt;
+    calculateSum($scope.receipt);
   });
