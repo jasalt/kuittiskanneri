@@ -2,11 +2,8 @@
 
 '''
 Autocomplete utilities and endpoints.
-
-Users added products are added to users the autocomplete-database.
-
-TODO: scrape some general autocomplete-sources
-
+User's added products and shops are used for autocompleting text input.
+Some scraped product names are also included.
 '''
 import json
 import os
@@ -33,43 +30,53 @@ def load_autocomplete_files():
         f.close()
         GLOBAL_AC_LIST.extend(lines)
 
-
 load_autocomplete_files()
 
 
 @mod.route('/api/autocomplete', methods=['GET'])
 def ac_get():
+    '''Return autocomplete word list for logged in user.'''
     users = mongo.db.users
     user = users.find_one(
         {"_id": request.authorization['username']})
     # TODO use dict, array dumps not probably secure
-    return json.dumps(user['products'] + GLOBAL_AC_LIST)
+    ac_list = {}
+    try:
+        user_products_ac = user['products'] + GLOBAL_AC_LIST
+    except:
+        print "User does not have any products for ac"
+        user_products_ac = GLOBAL_AC_LIST
+
+    try:
+        user_shops_ac = user['shops']
+    except:
+        print "User does not have any shops for ac"
+        user_shops_ac = []
+
+    return json.dumps({'products': user_products_ac, 'shops': user_shops_ac})
 
 
-def ac_add_user_products(receipt):
-    '''Add new products in receipt to user ac-list'''
-
+def ac_add_new_words(receipt):
+    '''Add new receipt's products and shop name user's ac-list'''
     users = mongo.db.users
-
     user = users.find_one(
         {"_id": request.authorization['username']})
 
+    # Check for new products
     try:
         user_products = user['products']
     except:
+        print "User does not yet have any products"
         user_products = []
-
-    new_user_products = []
 
     for product in receipt['products']:
         name = product['name']
         if name not in user_products and name not in GLOBAL_AC_LIST:
-            new_user_products.append(product['name'])
+            user_products.append(product['name'])
 
     # Append new products to database
-
     query = users.update({"_id": request.authorization['username']},
-                         {'$set': {'products': user_products +
-                                   new_user_products}})
-
+                         {'$set': {'products':
+                                   user_products}})
+    import ipdb; ipdb.set_trace()
     return query

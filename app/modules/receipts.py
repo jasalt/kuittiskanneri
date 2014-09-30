@@ -3,7 +3,7 @@ from flask.ext.pymongo import ObjectId
 
 from app import mongo
 from authentication import requires_auth
-from autocomplete import ac_add_user_products
+from autocomplete import ac_add_new_words
 from utils import jsonify
 
 '''
@@ -29,7 +29,8 @@ def receipt(id):
         receipt['_id'] = ObjectId(receipt['_id'])
         query = receipts.save(receipt)
         # TODO A save receipt product names to autocomplete database
-        ac_add_user_products(receipt)
+        ac_add_new_words(receipt)
+
         # add if not exists
 
         return jsonify(receipt)
@@ -57,7 +58,7 @@ def get_receipts():
         receipt['user'] = request.authorization['username']
         # TODO Validate input, add date if missing etc
         db_operation = receipts.insert(receipt)
-        ac_add_user_products(receipt)
+        ac_add_new_words(receipt)
         return jsonify({'savedReceipt': receipt, 'dbOperation': db_operation})
 # 201 Created
 # 403 Forbidden
