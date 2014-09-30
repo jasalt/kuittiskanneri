@@ -15,9 +15,8 @@ angular.module('myApp', [
   'myApp.stats',
 
   'myApp.receiptService',
-  // Authentication
-  'myApp.userAuthentication',
-  'datehistogram',
+
+  'dataVisualizationDirectives',
   'autocomplete',
   'angular-loading-bar'
 ]).

@@ -1,11 +1,15 @@
 <link rel="stylesheet" href="angular/stats/stats.css">
 
 <h1>Statistics view</h1>
-todo
-<fs-date-histo bind="mockData" on-click="alert('je')" />
 
-<div class="row col-xs-11">
-    <fs-date-histo bind="histogramData" interval="day" barwidth="20"/>
+<div class="row">
+  <h3>Histogram</h3>
+  <fs-date-histo bind="histogramData" interval="day" barwidth="20"/>
+</div>
+
+<div class="row">
+  <h3>Total money spent</h3>
+  <fs-area bind="areaDiagramData" interval="day" barwidth="20"/>
 </div>
 
 <!-- // Add area diagram and datehistogram -->
