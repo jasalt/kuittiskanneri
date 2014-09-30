@@ -9,13 +9,14 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
     $timeout(function() {
       $scope.delaySpent = true;
     },500);
+
     receiptService.getUserReceipts().then(function(result) {
       var receipts = result.data.receipts;
       if (receipts.length === 0){
         return;
       }
       else {
-        $scope.receipts = receipts;
+        $scope.receipts = receipts.reverse();
 
         $scope.numberOfPages = function(){
           return Math.ceil($scope.receipts.length/$scope.pageSize);

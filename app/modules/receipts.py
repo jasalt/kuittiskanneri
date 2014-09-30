@@ -73,6 +73,8 @@ def get_receipts():
         user_receipts = []
         for receipt in user_receipts_cursor:
             user_receipts.append(receipt)
+        # Sort by date
+        user_receipts.sort(key=lambda x: x['date'])
         return jsonify({'receipts':
                         user_receipts[offset:offset+limit],
                         'pagination': {

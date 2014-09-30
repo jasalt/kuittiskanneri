@@ -1,7 +1,8 @@
 "use strict";
 angular.module("myApp.stats", ['dataVisualizationDirectives'])
   .controller('StatsController', function ($scope, receiptService) {
-    var receipts = receiptService.getCachedReceipts();
+    // TODO HACK list gets reversed twice..
+    var receipts = receiptService.getCachedReceipts().reverse();
 
     $scope.histogramData = data_to_histogram(receipts);
     $scope.areaDiagramData = data_to_areaDiagram(receipts);
