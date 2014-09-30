@@ -67,3 +67,8 @@ canvas {
 .view-animate.ng-leave.ng-leave-active {
     opacity:0;
 }
+
+.login-button-style {
+    margin-top: 4px;
+    margin-right: 3px;
+}
