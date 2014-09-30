@@ -107,8 +107,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptServi
       $scope.receipt.total_sum = Math.round(newSum * 100) / 100;
     };
 
-    $scope.$watch('receipt', function(newValue, oldValue) {
-      console.log("changed receipt");
+    $scope.$watch('receipt.products', function(newValue, oldValue) {
       calculateSum($scope.receipt);
     }, true);
 

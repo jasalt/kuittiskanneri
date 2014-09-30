@@ -6,6 +6,7 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
 
     $scope.histogramData = data_to_histogram(receipts);
     $scope.areaDiagramData = data_to_areaDiagram(receipts);
+    $scope.donutDiagramData = data_to_donutDiagram(receipts);
 
     /*
      * Convert receipt data for histogram
@@ -35,4 +36,47 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
 
       return {'entries': entries};
     }
+
+    function data_to_donutDiagram(user_receipts){
+      var shops = [];
+
+      user_receipts.forEach(function(entry) {
+        var shop_name = entry.shop_name;
+
+        // Check if it exists
+        var found = false;
+        for(var i = 0; i < shops.length; i++) {
+          if (shops[i].term == shop_name) {
+            // increment if does
+            shops[i].count++;
+            found = true;
+          }
+        }
+        // otherwise add as first
+        if (!found){
+          shops.push({term: shop_name, count:1});
+          found = false;
+        }
+      });
+
+      var dataModel = {
+        _type : "terms",
+        terms : shops
+      };
+      return dataModel;
+    }
+
+    $scope.testin = {
+      _type : "terms",
+      terms : [{
+        term : "Prod-A",
+        count : 306
+      },{
+        term : "Prod-B",
+        count : 148
+      },{
+        term : "Prod-C",
+        count : 200
+      }]
+    };
   });
