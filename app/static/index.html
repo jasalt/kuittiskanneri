@@ -42,8 +42,8 @@
 
       <!-- <li ng-class="{ active: isActive('/')}"><a href="#/">Index</a></li> -->
 
-      <button ng-if="user" class="btn btn-danger pull-right" ng-click="logout()">Logout {{user}}</button>
-      <button ng-if="!user" class="btn btn-default pull-right" ng-click="login()">Login</button>
+      <button ng-if="user" class="btn btn-lg btn-default pull-right" ng-click="logout()">Logout {{user}} <span class="glyphicon glyphicon-log-out"></button>
+      <button ng-if="!user" class="btn btn-lg btn-default pull-right" ng-click="login()">Login<span class="glyphicon glyphicon-log-in"></button>
 
     </ul>
 
