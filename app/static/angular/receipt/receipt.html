@@ -1,26 +1,25 @@
 <link rel="stylesheet" href="angular/receipt/receipt.css">
 <!-- reuse animations -->
+
 <link rel="stylesheet" href="angular/home/home.css">
 <link rel="stylesheet" href="angular/autocomplete/autocomplete.css">
 
-<div ng-if="editingReceipt">
-  <div class="receipt-details">
-    <div class="row well">
-      <div class="col-xs-6">
-        <label class="control-label" for="inputShop">Shop</label>
-        <!-- <input required class="form-control" type="text"  placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop"> -->
-        <autocomplete placeholder="Shop" id="inputShop" required ng-model="receipt.shop_name" attr-placeholder="Product title" click-activation="true" data="autocompleteList.shops" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+<div ng-if="editingReceipt" class="edit-container view-animate">
+  <div class="row">
+    <div class="col-xs-6">
+      <label class="control-label" for="inputShop">Shop</label>
+      <!-- <input required class="form-control" type="text"  placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop"> -->
+      <autocomplete placeholder="Shop" id="inputShop" required ng-model="receipt.shop_name" attr-placeholder="Product title" click-activation="true" data="autocompleteList.shops" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
 
-      </div>
-      <div class="col-xs-6">
-        <label required class="control-label" for="inputDate">Date created</label>
-        <input class="form-control" type="date" placeholder="Date" ng-model="receipt.date" id="inputDate" >
-      </div>
+    </div>
+    <div class="col-xs-6">
+      <label required class="control-label" for="inputDate">Date created</label>
+      <input class="form-control" type="date" placeholder="Date" ng-model="receipt.date" id="inputDate" >
     </div>
   </div>
-  <p><strong>Products</strong></p>
 
-  <div class="list-group">
+  <div class="list-group edit-receipt-product-list">
+    <p><strong>Products</strong></p>
     <div class="row list-group-item repeat-item receipt-product-row" ng-repeat="product in receipt['products']">
       <div class="col-sm-9">
         <autocomplete required ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList.products" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
@@ -34,12 +33,12 @@
     </div>
   </div>
 
-<div class="row">
-  <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-default col-xs-5"><span class="glyphicon glyphicon-plus"></span>Add new product</button>
-  <div class="form-group col-xs-7">
-    <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
+  <div class="row">
+    <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-default col-xs-5"><span class="glyphicon glyphicon-plus"></span>Add new product</button>
+    <div class="form-group col-xs-7">
+      <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
+    </div>
   </div>
-</div>
 
   <div class="row bottom-controls">
     <div class="col-xs-6">
@@ -51,36 +50,28 @@
   </div>
 </div>
 
-<div ng-if="!editingReceipt">
+<div ng-if="!editingReceipt" class="view-animate"> <!-- todo add some caption -->
   <div class="receipt-details">
-    <div class="row well">
-      <div class="col-xs-6">
-        <label class="control-label" for="inputShop">Shop</label>
-        <input disabled class="form-control" type="text" placeholder="Shop" ng-model="receipt.shop_name" id="inputShop">
-      </div>
-
-      <div class="col-xs-6">
-        <label class="control-label" for="inputDate">Date</label>
-        <input disabled class="form-control" type="text" placeholder="Date" ng-model="receipt.date" id="inputDate" >
-      </div>
+    <div class="col-xs-6">
+      <h2>{{receipt.shop_name}}</h2>
     </div>
-  </div>
-  <p><strong>Products</strong></p>
-
-  <div class="row receipt-product-row" ng-repeat="product in receipt['products']">
-    <div class="col-xs-9">
-      <input disabled class="form-control" ng-model="product.name" type="text" placeholder="Product title">
-    </div>
-    <div class="col-xs-3">
-      <input disabled class="form-control" ng-model="product.price" type="text" placeholder="Price">
+    <div class="col-xs-6">
+      <h2> {{receipt.date}} </h2>
     </div>
   </div>
 
-<div class="row">
-  <div class="form-group col-xs-12">
-    <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
+  <table class="table">
+    <tr class="" ng-repeat="product in receipt['products']">
+      <td>{{product.name}}</td>
+      <td><strong>{{product.price}} €</strong></td>
+    </tr>
+
+  </table>
+  <div class="row">
+    <div class="form-group col-xs-12">
+      <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
+    </div>
   </div>
-</div>
 
   <div class="row bottom-controls">
     <div class="col-xs-6">

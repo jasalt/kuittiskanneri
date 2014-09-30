@@ -1,7 +1,16 @@
+
 #addProductButton{
     margin-bottom: 20px;
 }
 
 .bottom-controls{
     margin-bottom: 20px;
+}
+
+.edit-container {
+    margin-top: 20px;
+}
+
+.edit-receipt-product-list {
+    margin-top: 20px;
 }
