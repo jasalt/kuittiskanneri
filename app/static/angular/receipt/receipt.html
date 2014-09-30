@@ -13,7 +13,7 @@
 
     </div>
     <div class="col-xs-6">
-      <label required class="control-label" for="inputDate">Date created</label>
+      <label required class="control-label" for="inputDate">Date</label>
       <input class="form-control" type="date" placeholder="Date" ng-model="receipt.date" id="inputDate" >
     </div>
   </div>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="row">
-    <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-default col-xs-5"><span class="glyphicon glyphicon-plus"></span>Add new product</button>
+    <button ng-click="addProductField()" id="addProductButton" class="btn btn-lg btn-default col-xs-5"><span class="glyphicon glyphicon-plus"></span>Add product</button>
     <div class="form-group col-xs-7">
       <h2 class="text-right">Total: {{receipt['total_sum']}} €</h2>
     </div>
@@ -78,7 +78,7 @@
       <button class="btn btn-success btn-block btn-lg" ng-click="editReceipt()">Edit receipt <span class="glyphicon glyphicon-edit"></span></button>
     </div>
     <div class="col-xs-6">
-      <a href="#/home" class="btn btn-danger btn-block btn-lg">Back / Discard edits</a>
+      <a href="#/home" class="btn btn-danger btn-block btn-lg">Back / Discard</a>
     </div>
   </div>
 </div>

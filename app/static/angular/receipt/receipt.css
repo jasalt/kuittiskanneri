@@ -14,3 +14,9 @@
 .edit-receipt-product-list {
     margin-top: 20px;
 }
+
+.autocomplete-field{
+    margin-top:5px;
+    margin-bottom:5px;
+    padding-top:10px;
+}
