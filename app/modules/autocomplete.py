@@ -78,5 +78,21 @@ def ac_add_new_words(receipt):
     query = users.update({"_id": request.authorization['username']},
                          {'$set': {'products':
                                    user_products}})
-    import ipdb; ipdb.set_trace()
+
+    #  Check if the shop name is new
+    try:
+        user_shops = user['shops']
+        if user_shops is None:
+            user_shops = []
+    except:
+        print "User does not yet have any shops"
+        user_shops = []
+
+    receipt_shop = receipt['shop_name']
+    if receipt_shop not in user_shops:
+        print "Add new shop " + receipt_shop
+        user_shops.append(receipt_shop)
+        query = users.update({"_id": request.authorization['username']},
+                             {'$set': {'shops':
+                                       user_shops}})
     return query

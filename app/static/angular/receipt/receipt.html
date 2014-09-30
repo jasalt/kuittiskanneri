@@ -8,7 +8,9 @@
     <div class="row well">
       <div class="col-xs-6">
         <label class="control-label" for="inputShop">Shop</label>
-        <input required class="form-control" type="text"  placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop">
+        <!-- <input required class="form-control" type="text"  placeholder="Shop" ng-model="receipt.shop_name" required id="inputShop"> -->
+        <autocomplete placeholder="Shop" id="inputShop" required ng-model="receipt.shop_name" attr-placeholder="Product title" click-activation="true" data="autocompleteList.shops" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+
       </div>
       <div class="col-xs-6">
         <label required class="control-label" for="inputDate">Date created</label>
@@ -21,7 +23,7 @@
   <div class="list-group">
     <div class="row list-group-item repeat-item receipt-product-row" ng-repeat="product in receipt['products']">
       <div class="col-sm-9">
-        <autocomplete required ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
+        <autocomplete required ng-model="product.name" attr-placeholder="Product title" click-activation="true" data="autocompleteList.products" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
       </div>
       <div class="col-sm-2">
         <input class="form-control" ng-model="product.price" type="number" step=".01" placeholder="Price">
