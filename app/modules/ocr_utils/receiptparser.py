@@ -96,7 +96,7 @@ def parse_product_line(txt):
                 # Names with over 50% digits are not product names
                 if digit_percent > 0.5:
                     return None
-                return { 'name': product_name, 'price': price }
+                return {'name': product_name, 'price': float("{0:.2f}".format(price))}
     return None
 
 
@@ -108,7 +108,8 @@ def parse_sum(txt):
             # Try float parsing
             total_sum = parse_float(words[-1])
             if total_sum is not None:
-                return total_sum
+                # Return sum with 2 decimal precision
+                return float("{0:.2f}".format(total_sum))
     return None
 
 
