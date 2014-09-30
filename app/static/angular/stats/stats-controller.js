@@ -1,6 +1,12 @@
 "use strict";
 angular.module("myApp.stats", ['dataVisualizationDirectives'])
   .controller('StatsController', function ($scope, receiptService) {
+    /*
+     * Convert application receipt data quickly for use in 3rd party
+     * visualization plugin api's.
+     * Used plugins taken from https://github.com/fullscale/dangle
+     */
+
     // TODO HACK list gets reversed twice..
     var receipts = receiptService.getCachedReceipts().reverse();
 
@@ -8,9 +14,6 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
     $scope.areaDiagramData = data_to_areaDiagram(receipts);
     $scope.donutDiagramData = data_to_donutDiagram(receipts);
 
-    /*
-     * Convert receipt data for histogram
-     */
     function data_to_histogram(user_receipts) {
       var entries = [];
       user_receipts.forEach(function(entry) {
@@ -65,18 +68,4 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
       };
       return dataModel;
     }
-
-    $scope.testin = {
-      _type : "terms",
-      terms : [{
-        term : "Prod-A",
-        count : 306
-      },{
-        term : "Prod-B",
-        count : 148
-      },{
-        term : "Prod-C",
-        count : 200
-      }]
-    };
   });
