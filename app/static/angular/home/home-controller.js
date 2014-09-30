@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt', 'datehistogram'])
+angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt'])
   .controller('HomeController', function($scope, receiptService, userService, $location, $timeout) {
     $scope.currentPage = 0;
     $scope.pageSize = 10;
@@ -20,22 +20,8 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
         $scope.numberOfPages = function(){
           return Math.ceil($scope.receipts.length/$scope.pageSize);
         };
-        data_to_histogram($scope.receipts);
       }
     });
-
-    /*
-     * Convert receipt data for histogram
-     */
-    function data_to_histogram(user_receipts) {
-      var entries = [];
-      user_receipts.forEach(function(entry) {
-        var newEntry = {'time': entry.date,
-                        'count': entry.total_sum};
-        entries.push(newEntry);
-      });
-      $scope.histogramData = {'entries': entries};
-    }
 
     /*
      * When selecting a receipt from history, set it as current and redirect to receipt view
@@ -50,7 +36,6 @@ angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService'
         // After successful delete, remove from scope also
         $scope.receipts = _.without($scope.receipts, _.findWhere(
           $scope.receipts, {'_id': receiptid}));
-        data_to_histogram($scope.receipts);
       });
     };
   })
