@@ -23,7 +23,8 @@
     <button type="button" ng-click="deleteReceipt(receipt['_id']); $event.preventDefault()" class="close pull-left"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   </div>
   <a class="btn btn-lg btn-default" href="#/upload">Add <span class="glyphicon glyphicon-plus"></a>
-  <div class="text-center row col-xs-12">
+
+  <div ng-show="receipts.length > 10" class="text-center row col-xs-12">
     <button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
       Previous
     </button>
