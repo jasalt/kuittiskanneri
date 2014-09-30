@@ -8,7 +8,7 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
      */
 
     // TODO HACK list gets reversed twice..
-    var receipts = receiptService.getCachedReceipts().reverse();
+    var receipts = _.clone(receiptService.getCachedReceipts()).reverse();
 
     $scope.histogramData = data_to_histogram(receipts);
     $scope.areaDiagramData = data_to_areaDiagram(receipts);
@@ -62,10 +62,10 @@ angular.module("myApp.stats", ['dataVisualizationDirectives'])
         }
       });
 
-      var dataModel = {
+      var requiredDataModel = {
         _type : "terms",
         terms : shops
       };
-      return dataModel;
+      return requiredDataModel;
     }
   });
