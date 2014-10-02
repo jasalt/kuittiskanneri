@@ -31,6 +31,8 @@
     background-color: red;
 }
 
+/* Animation during upload request */
+
 .upload-controls-fadeout {
   -webkit-transition:all linear 0.2s;
   transition:all linear 0.2s;

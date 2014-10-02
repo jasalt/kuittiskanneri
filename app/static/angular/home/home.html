@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="angular/home/home.css">
 <link rel="stylesheet" href="angular/stats/stats.css">
 
 <h1>Home</h1>
@@ -6,10 +5,10 @@
 
 <h2 ng-show="!receipts && !loading && delaySpent">You haven't uploaded any receipts yet!</h2>
 
-<div ng-show="receipts" class="receipt-history-list col-xs-11">
+<div ng-show="receipts" class="receipt-history-list col-xs-11" >
   <h2>History</h2>
 
-  <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeat-item row">
+  <div ng-repeat="receipt in receipts |startFrom: currentPage*pageSize| limitTo:pageSize" class="repeated-item row">
     <div class="receipt-entry-fadeout list-group col-xs-11">
       <a class="list-group-item" ng-click="selectReceipt(receipt)">
         <h2 class="pull-right list-group-item-heading receipt-sum">{{receipt.total_sum}} €</h2>
