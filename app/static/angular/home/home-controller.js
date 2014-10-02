@@ -6,7 +6,9 @@ angular.module('myApp.home', ['myApp.userAuthentication',
     $scope.currentPage = 0;
     $scope.pageSize = 10;
 
-    console.log("Getting receipts for " + userService.getUsername());
+    console.log("Getting receipts for " + userService.getUser());
+
+    // Minimum animation delay
     $timeout(function() {
       $scope.delaySpent = true;
     },500);

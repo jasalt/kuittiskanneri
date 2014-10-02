@@ -25,7 +25,7 @@ angular.module('myApp.receipt', ['myApp.userAuthentication',
                           credit_card: false,
                           total_sum: null,
                           shop_name: null,
-                          user: userService.getUsername(),
+                          user: userService.getUser(),
                           date: Date.now()  // Epoch time
                         };
     }

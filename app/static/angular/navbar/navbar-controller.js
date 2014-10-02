@@ -12,7 +12,7 @@ angular.module('myApp.navbar', ['myApp.userAuthentication'])
     // listen for changes in location or messages and re-query
 
     $scope.$on("$routeChangeSuccess", function() {
-      $scope.user = userService.getUsername();
+      $scope.user = userService.getUser();
       if (!$scope.user) {
         console.log("Not logged in.");
       }
@@ -20,6 +20,6 @@ angular.module('myApp.navbar', ['myApp.userAuthentication'])
 
     $scope.logout = function() {
       alert("logging out");
-      userService.logout();
+      userService.logoutUser();
     };
   });
