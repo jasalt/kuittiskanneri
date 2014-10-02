@@ -1,26 +1,29 @@
 "use strict";
-// Declare app level module which depends on filters, and services
+/*
+ * Load app modules
+ */
 angular.module('myApp', [
   'ngRoute',
   'ngCookies',
   'ngAnimate',
 
-  // Views
+  // Controller for navbar declared in ../index.html
+  'myApp.navbar',
+
+  // Partial views
+  'myApp.root',
+  'myApp.register',
   'myApp.home',
   'myApp.upload',
-  'myApp.register',
-  'myApp.receipt',
-  'myApp.navbar',
-  'myApp.root',
   'myApp.stats',
 
-  'myApp.receiptService',
-
-  'dataVisualizationDirectives',
-  'autocomplete',
-  'angular-loading-bar'
-]).
-  config(function($routeProvider, $httpProvider) {
+  // Loading bar for AJAX requests
+  'cfp.loadingBarInterceptor'
+])
+/*
+ * Set url routings
+ */
+  .config(function($routeProvider, cfpLoadingBarProvider) {
     $routeProvider
       .when('/',
             { templateUrl: 'angular/root/root.html',
@@ -43,12 +46,12 @@ angular.module('myApp', [
       .when('/about', { templateUrl: 'angular/about/about.html'})
       .otherwise({redirectTo: '/'});
 
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-    $httpProvider.defaults.headers.put['Content-Type'] = 'application/json; charset=utf-8';
-  })
-  .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    // Disable loading bar spinner
     cfpLoadingBarProvider.includeSpinner = false;
-  }])
+  })
+/*
+ * Check that user is authenticated, redirect otherwise
+ */
   .run(function($logincheck, $location, $cookies, userService) {
     if (!$cookies.authdata) {
       console.log("User not logged in, redirecting to index");
