@@ -3,7 +3,7 @@ Web development course project
 
 Prototype mobile webapp for storing receipts with automated text parsing.
 
-Demo currently at http://kuit.dy.fi user: 'testuser' pass: 'pass'. Running flask dev server, which blocks requests while doing OCR.
+Demo currently at http://kuit.dy.fi user:testuser password:pass. Running flask dev server, which blocks requests while doing OCR.
 
 Looks best with Chromium based browsers (uses datepicker in date-input field) and mobile browsers.
 
