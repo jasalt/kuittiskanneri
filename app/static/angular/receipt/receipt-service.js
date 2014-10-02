@@ -67,6 +67,8 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
 
     /*
      * Fetch all user receipts from API
+     * This is called each time when accessing /home
+     * TODO call API only when required.
      */
     this.getUserReceipts = function() {
       var promise = $http({method: 'GET', url: '/api/receipts'}).
@@ -80,11 +82,11 @@ angular.module('myApp.receiptService', ['myApp.userAuthentication'])
       return promise;
     };
 
-
     // Get receipts stored/cached in this service
     this.getCachedReceipts = function() {
       return userReceipts;
     };
+
 
 
     // this.getMockReceipt = function() {

@@ -34,7 +34,6 @@ angular.module('myApp.userAuthentication', ['myApp.receipt',
         success(function(data) {
           console.log("Login OK.");
           setUser(data._id, data.pw_hash);
-          receiptService.setUserReceipts(data.receipts);
           $location.path('/home');
         }).
         error(function(data) {
