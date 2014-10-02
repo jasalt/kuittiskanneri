@@ -7,3 +7,5 @@ venv/
 app/uploads/
 uploads/
 .DS_Store
+app/secrets.py
+secrets/
