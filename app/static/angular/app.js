@@ -17,6 +17,7 @@ angular.module('myApp', [
   'myApp.upload',
   'myApp.stats',
 
+  'myApp.authUtils',
   // Loading bar for AJAX requests
   'cfp.loadingBarInterceptor'
 ])
@@ -50,14 +51,14 @@ angular.module('myApp', [
     cfpLoadingBarProvider.includeSpinner = false;
   })
 /*
- * Check that user is authenticated, redirect otherwise
+ * Check that user is authenticated, redirect otherwise.
+ * TODO: cookies are not removed with logout
  */
-  .run(function($logincheck, $location, $cookies, userService) {
+  .run(function($location, $cookies, userService) {
     if (!$cookies.authdata) {
       console.log("User not logged in, redirecting to index");
       $location.path('/');
-    } else
-    {
+    } else {
       console.log("Cookie found, logging in");
       userService.loginUser();
       $location.path('/home');

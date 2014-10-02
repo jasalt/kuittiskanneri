@@ -1,6 +1,7 @@
 "use strict";
-
-angular.module('myApp.home', ['myApp.userAuthentication', 'myApp.receiptService', 'myApp.receipt'])
+angular.module('myApp.home', ['myApp.userAuthentication',
+                              'myApp.receiptService',
+                              'myApp.receipt'])
   .controller('HomeController', function($scope, receiptService, userService, $location, $timeout) {
     $scope.currentPage = 0;
     $scope.pageSize = 10;

@@ -1,5 +1,7 @@
 "use strict";
-angular.module('myApp.receipt', ['myApp.userAuthentication', 'myApp.receiptService', 'autocomplete'])
+angular.module('myApp.receipt', ['myApp.userAuthentication',
+                                 'myApp.receiptService',
+                                 'autocomplete'])
   .controller('ReceiptController', function($scope, $location, $filter, receiptService, userService, autocompleteService) {
     autocompleteService.getAutocompleteList().then(
       function(resp) {
