@@ -3,10 +3,9 @@ angular.module('myApp.home', ['myApp.userAuthentication',
                               'myApp.receiptService',
                               'myApp.receipt'])
   .controller('HomeController', function($scope, receiptService, userService, $location, $timeout) {
+    // Pagination values
     $scope.currentPage = 0;
     $scope.pageSize = 10;
-
-    console.log("Getting receipts for " + userService.getUser());
 
     // Minimum animation delay
     $timeout(function() {
@@ -19,8 +18,10 @@ angular.module('myApp.home', ['myApp.userAuthentication',
         return;
       }
       else {
+        // Show receipts descending from newest to oldest
         $scope.receipts = receipts.reverse();
 
+        // Set pagination
         $scope.numberOfPages = function(){
           return Math.ceil($scope.receipts.length/$scope.pageSize);
         };
