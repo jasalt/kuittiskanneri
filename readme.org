@@ -1,0 +1,38 @@
+* Grocery receipt store
+Web development course project
+
+Prototype mobile webapp for storing receipts with automated text parsing.
+
+Demo currently at http://kuit.dy.fi user: 'testuser' pass: 'pass'. Running flask dev server, which blocks requests while doing OCR.
+
+Looks best with Chromium based browsers (uses datepicker in date-input field) and mobile browsers.
+
+** Architecture
+- AngularJS + Bootstrap frontend
+  - Pretty minimal animated UI
+  - Some data visualization with D3 library
+  - Autocompletes text input when entering products manually
+- Rest api backend with Python Flask
+  - Scrapers for some Finnish grocery store items
+  - Tesseract for OCR, called with shell script.
+- MongoDB database
+
+Module seperation is pretty good in both backend and frontend.
+
+TODO [drawing]
+TODO [ui-video]
+
+** Undone
+Untested on most browsers, works probably only on fairly new browsers.
+
+Code is untested.
+
+Proper data validation / db schema is missing.
+
+Some problems with removing cookies at logout (http simple auth).
+
+OCR could be done a lot better.. Currently works for demoing.
+
+Project is not optimized for production use (minified js ...)
+
+...
