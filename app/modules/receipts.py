@@ -62,12 +62,14 @@ def get_receipts():
         return jsonify({'savedReceipt': receipt, 'dbOperation': db_operation})
 # 201 Created
 # 403 Forbidden
+
     if request.method == 'GET':
         ''' List all receipts for request user.
         Pagination is set by limit and offset variables.
         '''
         limit = request.args.get('limit') or 1000
         offset = request.args.get('offset') or 0
+
         receipts = mongo.db.receipts
         user_receipts_cursor = receipts.find(
             {"user": request.authorization['username']})
@@ -76,6 +78,7 @@ def get_receipts():
             user_receipts.append(receipt)
         # Sort by date
         user_receipts.sort(key=lambda x: x['date'])
+
         return jsonify({'receipts':
                         user_receipts[offset:offset+limit],
                         'pagination': {

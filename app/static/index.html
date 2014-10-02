@@ -14,7 +14,7 @@
       <!-- Disable zoom -->
       <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
 
-      <title>ScannerApp</title>
+      <title>Receipt store</title>
 
       <link rel="stylesheet" href="css/style.css" type="text/css">
       <link rel="stylesheet" href="css/animations.css" type="text/css">
@@ -25,6 +25,8 @@
       <!--[if lt IE 9]>
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
           <![endif]-->
+      <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+
   </head>
 
   <body>
@@ -65,19 +67,25 @@
 
     <script src="angular/app.js"></script>
 
-    <script src="angular/home/home-controller.js"></script>
-    <script src="angular/upload/upload-controller.js"></script>
-    <script src="angular/receipt/receipt-controller.js"></script>
-    <script src="angular/receipt/receipt-service.js"></script>
-    <script src="angular/register/register-controller.js"></script>
-    <script src="angular/navbar/navbar-controller.js"></script>
-    <script src="angular/root/root-controller.js"></script>
-    <script src="angular/user-authentication.js"></script>
+    <!-- View controllers -->
+    <script src="angular/views/home/home-controller.js"></script>
+    <script src="angular/views/upload/upload-controller.js"></script>
+    <script src="angular/views/receipt/receipt-controller.js"></script>
+    <script src="angular/views/register/register-controller.js"></script>
+    <script src="angular/views/navbar/navbar-controller.js"></script>
+    <script src="angular/views/root/root-controller.js"></script>
+    <script src="angular/views/stats/stats-controller.js"></script>
 
-    <script src="angular/stats/stats-controller.js"></script>
-    <script src="angular/stats/data-visualization-directives.js"></script>
+    <!-- Reusable components and utilities -->
+    <script src="angular/components/visualization/data-visualization-directives.js"></script>
     <script src="angular/components/loading-indicator/loading-bar.js"></script>
     <script src="angular/components/authUtils.js"></script>
-    <script src="angular/autocomplete/autocomplete.js"></script>
+    <script src="angular/components/autocomplete/autocomplete.js"></script>
+
+    <!-- Services -->
+    <script src="angular/services/user-service.js"></script>
+    <script src="angular/services/receipt-service.js"></script>
+
+
   </body>
 </html>

@@ -27,24 +27,24 @@ angular.module('myApp', [
   .config(function($routeProvider, cfpLoadingBarProvider) {
     $routeProvider
       .when('/',
-            { templateUrl: 'angular/root/root.html',
+            { templateUrl: 'angular/views/root/root.html',
               controller: 'RootController'})
       .when('/register',
-            { templateUrl: 'angular/register/register.html',
+            { templateUrl: 'angular/views/register/register.html',
               controller: 'RegisterController'})
       .when('/home',
-            { templateUrl: 'angular/home/home.html',
+            { templateUrl: 'angular/views/home/home.html',
               controller: 'HomeController'})
       .when('/upload',
-            { templateUrl: 'angular/upload/upload.html',
+            { templateUrl: 'angular/views/upload/upload.html',
               controller: 'UploadController'})
       .when('/stats',
-            { templateUrl: 'angular/stats/stats.html',
+            { templateUrl: 'angular/views/stats/stats.html',
               controller: 'StatsController'})
       .when('/receipt',
-            { templateUrl: 'angular/receipt/receipt.html',
+            { templateUrl: 'angular/views/receipt/receipt.html',
               controller: 'ReceiptController'})
-      .when('/about', { templateUrl: 'angular/about/about.html'})
+      .when('/about', { templateUrl: 'angular/views/about/about.html'})
       .otherwise({redirectTo: '/'});
 
     // Disable loading bar spinner
