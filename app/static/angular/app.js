@@ -16,10 +16,13 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.upload',
   'myApp.stats',
-
   'myApp.authUtils',
   // Loading bar for AJAX requests
-  'cfp.loadingBarInterceptor'
+  'cfp.loadingBarInterceptor',
+
+  // Google Analytics for angular views
+  'angulartics',
+  'angulartics.google.analytics'
 ])
 /*
  * Set url routings
