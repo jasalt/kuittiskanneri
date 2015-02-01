@@ -1,13 +1,13 @@
-* Grocery receipt store
+# Grocery receipt store
 Web development course project
 
 Prototype mobile webapp for storing receipts with automated text parsing.
 
-Video demo in [[Youtube](https://www.youtube.com/watch?v=YUJ11Dzjx6w)]
+[![Youtube Demo Video](https://raw.github.com/jasalt/kuittiskanneri/master/ui-anim.gif)](https://www.youtube.com/watch?v=YUJ11Dzjx6w)
 
 Looks best with Chromium based browsers (uses datepicker in date-input field) and mobile browsers.
 
-** Architecture
+## Architecture
 - AngularJS + Bootstrap frontend
   - Pretty minimal animated UI
   - Some data visualization with D3 library
@@ -19,10 +19,9 @@ Looks best with Chromium based browsers (uses datepicker in date-input field) an
 
 Module seperation is pretty good in both backend and frontend.
 
-TODO [drawing]
-TODO [ui-video]
+- TODO Architecture drawing
 
-** Undone
+## Undone
 Untested on most browsers, works probably only on fairly new browsers.
 
 Code is untested.
