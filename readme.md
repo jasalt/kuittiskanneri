@@ -43,8 +43,8 @@ Project is not optimized for production use (minified js ...)
   https://docs.docker.com/engine/installation/<br />
   https://docs.docker.com/compose/install/
 
-- Execute being in the root:
-  'docker-compose up'
+- Execute being in the root:<br />
+  `docker-compose up`
 
-- Open the page in a browser:
+- Open the page in a browser:<br />
   http://localhost:8008/
