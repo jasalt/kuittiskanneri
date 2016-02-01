@@ -36,12 +36,11 @@ Project is not optimized for production use (minified js ...)
 
 # How to Build and Run
 
-- Create the file './app/secret.py' and put inside credentials
-  for accessing MongoDB like:
+- Create the file './app/secrets.py' and put inside credentials for accessing MongoDB like:<br />
   MONGO_URI = 'mongodb://mongo/app'
 
-- Install Docker and Docker-Compose as described here:
-  https://docs.docker.com/engine/installation/
+- Install Docker and Docker-Compose as described here:<br />
+  https://docs.docker.com/engine/installation/<br />
   https://docs.docker.com/compose/install/
 
 - Execute being in the root:
