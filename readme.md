@@ -34,4 +34,18 @@ OCR could be done a lot better.. Currently works for demoing.
 
 Project is not optimized for production use (minified js ...)
 
-...
+# How to Build and Run
+
+- Create the file './app/secret.py' and put inside credentials
+  for accessing MongoDB like:
+  MONGO_URI = 'mongodb://mongo/app'
+
+- Install Docker and Docker-Compose as described here:
+  https://docs.docker.com/engine/installation/
+  https://docs.docker.com/compose/install/
+
+- Execute being in the root:
+  'docker-compose up'
+
+- Open the page in a browser:
+  http://localhost:8008/
