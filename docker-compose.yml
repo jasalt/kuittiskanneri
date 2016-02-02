@@ -1,0 +1,13 @@
+mongo:
+  image: mongo
+  volumes:
+   - ./db:/data/db
+app:
+  build: .
+  ports:
+   - "8008:8008"
+  volumes:
+   - .:/code
+  links:
+   - mongo
+

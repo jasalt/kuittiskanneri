@@ -9,3 +9,5 @@ uploads/
 .DS_Store
 app/secrets.py
 secrets/
+db/*
+!README.md
