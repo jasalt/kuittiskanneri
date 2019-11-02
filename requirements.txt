@@ -2,7 +2,7 @@ Flask==0.10.1
 Flask-PyMongo==0.3.0
 Jinja2==2.7.3
 MarkupSafe==0.23
-Werkzeug==0.9.6
+Werkzeug==0.15.3
 argparse==1.2.1
 arrow==0.4.4
 backports.ssl-match-hostname==3.4.0.2
