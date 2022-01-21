@@ -9,7 +9,7 @@ argparse==1.2.1
 arrow==0.4.4
 gnureadline==6.3.3
 ipdb==0.8
-ipython==2.2.0
+ipython==7.16.3
 itsdangerous==0.24
 passlib==1.6.2
 pymongo==2.7.2
